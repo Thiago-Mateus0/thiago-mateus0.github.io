@@ -10,6 +10,7 @@ export default {
         ink: 'rgb(var(--ink) / <alpha-value>)',
         mute: 'rgb(var(--mute) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
+        accent2: 'rgb(var(--accent2) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

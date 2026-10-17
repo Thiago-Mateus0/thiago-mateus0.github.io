@@ -1,5 +1,6 @@
 import { t, type Lang } from '../data/content'
 import Reveal from './Reveal'
+import ScrambleText from './ScrambleText'
 
 export default function About({ lang }: { lang: Lang }) {
   const tx = t[lang].about
@@ -7,7 +8,7 @@ export default function About({ lang }: { lang: Lang }) {
     <section id="about" className="section">
       <Reveal>
         <p className="eyebrow">{tx.eyebrow}</p>
-        <h2 className="h2">{tx.title}</h2>
+        <h2 className="h2"><ScrambleText text={tx.title} /></h2>
       </Reveal>
       <div className="grid gap-10 md:grid-cols-2">
         <Reveal delay={0.1} className="space-y-4 text-mute">

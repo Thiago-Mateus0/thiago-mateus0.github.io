@@ -15,6 +15,7 @@ export interface Project {
   repo: string
   demo?: string
   private?: boolean // repo privado: sem link de código
+  snippet: string[] // linhas decorativas do banner do card
   pt: { tagline: string; description: string; highlights: string[] }
   en: { tagline: string; description: string; highlights: string[] }
 }
@@ -26,6 +27,7 @@ export const projects: Project[] = [
     year: '2026',
     tags: ['React', 'TypeScript', 'PostgreSQL', 'Node.js', 'Docker'],
     repo: 'https://github.com/Thiago-Mateus0/lifetrailer-studio',
+    snippet: ['comanda.abrir(cliente)', 'comanda.lancar(item)', "comanda.fechar()  // → 'fechada'"],
     pt: {
       tagline: 'Gestão operacional de um estúdio de fotografia, em produção.',
       description:
@@ -54,6 +56,7 @@ export const projects: Project[] = [
     tags: ['Python', 'FastAPI', 'SQLite', 'React', 'TypeScript', 'Tailwind', 'Pytest'],
     repo: 'https://github.com/Thiago-Mateus0/finan-as',
     private: true,
+    snippet: ['classificar(lancamento)', 'if repasse: ignorar()', 'gasto_real = centavos(int)'],
     pt: {
       tagline: 'App de finanças pessoais que mostra para onde o dinheiro vai.',
       description:
@@ -83,6 +86,7 @@ export const projects: Project[] = [
     year: '2026',
     tags: ['Python', 'JSON', 'CLI'],
     repo: 'https://github.com/Thiago-Mateus0/Study-Track',
+    snippet: ['while True:', '    topico = input()', '    salvar_json(topico, min)'],
     pt: {
       tagline: 'Meu primeiro código: acompanhar meus estudos.',
       description:
@@ -147,7 +151,8 @@ export const t = {
       lead: 'Estudante de Ciência da Computação construindo sistemas reais. Foco em back-end, dados e, em seguida, IA e machine learning.',
       cta1: 'Ver projetos',
       cta2: 'Falar comigo',
-      cmd: 'Dica: pressione Ctrl+K para navegar',
+      cmd: 'Dica: clique em qualquer lugar. Cada clique é diferente. Ctrl+K navega.',
+      roles: ['Back-end', 'Full Stack', 'Dados', 'IA & ML'],
     },
     about: {
       eyebrow: '01 / sobre',
@@ -171,8 +176,15 @@ export const t = {
       cv: 'Baixar currículo',
       soon: 'Em breve',
     },
-    footer: 'Feito por TM · React + Vite',
-    palette: { placeholder: 'Ir para…', theme: 'Alternar tema', lang: 'Mudar idioma (EN)', empty: 'Nada encontrado' },
+    stats: { projects: 'Projetos', tech: 'Tecnologias', langs: 'Idiomas' },
+    intro: {
+      skip: 'clique ou Esc para pular',
+      lines: ['$ ssh tm@maceio.dev', '> autenticando... ok', '> carregando projetos... ok', '> stack: python · typescript · sql', '> acesso liberado ✓'],
+      role: 'Full Stack · Back-end & IA',
+    },
+    copy: { idle: 'Copiar e-mail', done: 'Copiado ✓' },
+    footer: 'Feito por TM · React + Vite · psst: tente ↑ ↑ ↓ ↓ ← → ← → B A',
+    palette: { placeholder: 'Ir para…', theme: 'Alternar tema', lang: 'Mudar idioma (EN)', empty: 'Nada encontrado', intro: 'Rever abertura' },
   },
   en: {
     nav: { about: 'About', projects: 'Projects', stack: 'Stack', path: 'Path', contact: 'Contact' },
@@ -182,7 +194,8 @@ export const t = {
       lead: 'Computer Science student building real systems. Focused on back-end, data, and next, AI and machine learning.',
       cta1: 'See projects',
       cta2: 'Get in touch',
-      cmd: 'Tip: press Ctrl+K to navigate',
+      cmd: 'Tip: click anywhere. Every click is different. Ctrl+K navigates.',
+      roles: ['Back-end', 'Full Stack', 'Data', 'AI & ML'],
     },
     about: {
       eyebrow: '01 / about',
@@ -206,7 +219,14 @@ export const t = {
       cv: 'Download résumé',
       soon: 'Coming soon',
     },
-    footer: 'Built by TM · React + Vite',
-    palette: { placeholder: 'Go to…', theme: 'Toggle theme', lang: 'Switch language (PT)', empty: 'Nothing found' },
+    stats: { projects: 'Projects', tech: 'Technologies', langs: 'Languages' },
+    intro: {
+      skip: 'click or Esc to skip',
+      lines: ['$ ssh tm@maceio.dev', '> authenticating... ok', '> loading projects... ok', '> stack: python · typescript · sql', '> access granted ✓'],
+      role: 'Full Stack · Back-end & AI',
+    },
+    copy: { idle: 'Copy e-mail', done: 'Copied ✓' },
+    footer: 'Built by TM · React + Vite · psst: try ↑ ↑ ↓ ↓ ← → ← → B A',
+    palette: { placeholder: 'Go to…', theme: 'Toggle theme', lang: 'Switch language (PT)', empty: 'Nothing found', intro: 'Replay intro' },
   },
 }

@@ -1,5 +1,6 @@
 import { stack, t, type Lang } from '../data/content'
 import Reveal from './Reveal'
+import ScrambleText from './ScrambleText'
 
 export default function Stack({ lang }: { lang: Lang }) {
   const tx = t[lang].stack
@@ -7,7 +8,7 @@ export default function Stack({ lang }: { lang: Lang }) {
     <section id="stack" className="section">
       <Reveal>
         <p className="eyebrow">{tx.eyebrow}</p>
-        <h2 className="h2">{tx.title}</h2>
+        <h2 className="h2"><ScrambleText text={tx.title} /></h2>
       </Reveal>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {stack[lang].map((g, i) => (

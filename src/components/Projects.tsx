@@ -3,6 +3,7 @@ import { LayoutGroup } from 'framer-motion'
 import { projects, t, type Lang } from '../data/content'
 import ProjectCard from './ProjectCard'
 import Reveal from './Reveal'
+import ScrambleText from './ScrambleText'
 
 export default function Projects({ lang }: { lang: Lang }) {
   const tx = t[lang].projects
@@ -14,7 +15,7 @@ export default function Projects({ lang }: { lang: Lang }) {
     <section id="projects" className="section">
       <Reveal>
         <p className="eyebrow">{tx.eyebrow}</p>
-        <h2 className="h2">{tx.title}</h2>
+        <h2 className="h2"><ScrambleText text={tx.title} /></h2>
         <div className="mb-8 flex flex-wrap gap-2 font-mono text-xs" role="group" aria-label="filtro">
           {[null, ...tags].map((x) => (
             <button
@@ -30,7 +31,7 @@ export default function Projects({ lang }: { lang: Lang }) {
       </Reveal>
       <LayoutGroup>
         <div className="grid items-start gap-5 md:grid-cols-2">
-          {shown.map((p) => <ProjectCard key={p.id} p={p} lang={lang} />)}
+          {shown.map((p) => <ProjectCard key={p.id} p={p} lang={lang} index={projects.indexOf(p)} />)}
         </div>
       </LayoutGroup>
     </section>

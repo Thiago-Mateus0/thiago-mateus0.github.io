@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { t, type Lang } from '../data/content'
+import { INTRO_VARIANTS, type IntroVariant } from '../hooks/intro'
 
-interface Props { lang: Lang; onLang: () => void; onTheme: () => void }
+interface Props { lang: Lang; onLang: () => void; onTheme: () => void; onIntro: (v: IntroVariant) => void }
 
-export default function CommandPalette({ lang, onLang, onTheme }: Props) {
+export default function CommandPalette({ lang, onLang, onTheme, onIntro }: Props) {
   const tx = t[lang]
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
@@ -18,8 +19,9 @@ export default function CommandPalette({ lang, onLang, onTheme }: Props) {
       })),
       { label: tx.palette.theme, run: onTheme },
       { label: tx.palette.lang, run: onLang },
+      ...INTRO_VARIANTS.map((v) => ({ label: `${tx.palette.intro}: ${v}`, run: () => onIntro(v) })),
     ],
-    [tx, onLang, onTheme],
+    [tx, onLang, onTheme, onIntro],
   )
   const list = actions.filter((a) => a.label.toLowerCase().includes(q.toLowerCase()))
 
