@@ -156,6 +156,7 @@ export const t = {
     },
     about: {
       eyebrow: '01 / sobre',
+      photo: 'TM · Maceió, AL',
       title: 'Quem está por trás do código',
       p1: 'Sou muito focado no que faço. Prefiro entender o problema de verdade antes de escrever a primeira linha, e entregar algo que as pessoas usam no dia a dia.',
       p2: 'Estou em formação e procuro minha vaga: qualquer oportunidade para crescer em time, de preferência em back-end, full stack, IA ou machine learning.',
@@ -199,6 +200,7 @@ export const t = {
     },
     about: {
       eyebrow: '01 / about',
+      photo: 'TM · Maceió, Brazil',
       title: 'The person behind the code',
       p1: 'I\'m very focused on what I do. I prefer to truly understand the problem before writing the first line, and to ship something people use every day.',
       p2: 'I\'m still in training and looking for my first role: any chance to grow in a team, preferably in back-end, full stack, AI or machine learning.',

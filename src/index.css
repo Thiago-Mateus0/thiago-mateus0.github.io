@@ -49,3 +49,4 @@ body { @apply bg-bg text-ink font-sans antialiased; transition: background-color
 .marquee-track { display: flex; width: max-content; gap: .75rem; animation: marquee 50s linear infinite; }
 .marquee-track.rev { animation-direction: reverse; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
