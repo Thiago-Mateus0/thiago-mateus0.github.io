@@ -56,7 +56,11 @@ export default function ProjectCard({ p, lang }: { p: Project; lang: Lang }) {
         <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="font-medium text-accent hover:underline">
           {open ? tx.less : tx.more}
         </button>
-        <a href={p.repo} target="_blank" rel="noreferrer" className="text-mute hover:text-ink">{tx.repo} ↗</a>
+        {p.private ? (
+          <span className="text-mute">{tx.private}</span>
+        ) : (
+          <a href={p.repo} target="_blank" rel="noreferrer" className="text-mute hover:text-ink">{tx.repo} ↗</a>
+        )}
         {p.demo && <a href={p.demo} target="_blank" rel="noreferrer" className="text-mute hover:text-ink">{tx.demo} ↗</a>}
       </div>
     </motion.article>

@@ -14,6 +14,7 @@ export interface Project {
   tags: string[]
   repo: string
   demo?: string
+  private?: boolean // repo privado: sem link de código
   pt: { tagline: string; description: string; highlights: string[] }
   en: { tagline: string; description: string; highlights: string[] }
 }
@@ -48,29 +49,31 @@ export const projects: Project[] = [
   },
   {
     id: 'arkhe',
-    name: 'Arkhé Finance API',
+    name: 'Arkhé Finance',
     year: '2026',
-    tags: ['Python', 'FastAPI', 'SQLite', 'REST'],
-    repo: 'https://github.com/Thiago-Mateus0/arkhe-finance-api',
-    demo: 'https://arkhe-finance-api.onrender.com/docs',
+    tags: ['Python', 'FastAPI', 'SQLite', 'React', 'TypeScript', 'Tailwind', 'Pytest'],
+    repo: 'https://github.com/Thiago-Mateus0/finan-as',
+    private: true,
     pt: {
-      tagline: 'API REST de controle financeiro pessoal, no ar.',
+      tagline: 'App de finanças pessoais que mostra para onde o dinheiro vai.',
       description:
-        'Evolução do meu primeiro app de finanças para uma API: transações de entrada e saída, categorias, filtros e um resumo consolidado. Publicada no Render, com documentação Swagger.',
+        'Importa o CSV de conta e de fatura do Nubank, separa o que é gasto do que é só dinheiro passando pela conta e categoriza por regras. Roda local, sem enviar dado financeiro a ninguém. Nasceu da minha API de finanças e virou um app completo, com interface para celular.',
       highlights: [
-        'CRUD completo com filtros por tipo e categoria',
-        'Rotas organizadas em módulos (transações, categorias, dashboard)',
-        'Próximos passos: PostgreSQL, JWT e testes com Pytest',
+        'Classificação de lançamentos: pagamento de fatura, Pix entre contas e repasses não contam como gasto',
+        'Importação idempotente e dinheiro em centavos inteiros, nunca float',
+        'Orçamento por categoria, parcelas a vir e assinaturas, cada regra de dinheiro com teste',
+        'Decisões documentadas em ADRs; interface React + TypeScript, mobile-first e com tema claro e escuro',
       ],
     },
     en: {
-      tagline: 'Personal finance REST API, live.',
+      tagline: 'Personal finance app that shows where the money goes.',
       description:
-        'An evolution of my first finance app into an API: income and expense transactions, categories, filters and a consolidated summary. Deployed on Render with Swagger docs.',
+        'Imports Nubank account and card CSVs, separates real spending from money just passing through the account, and categorizes by rules. Runs locally and sends no financial data to anyone. It grew out of my finance API into a full app with a mobile-first interface.',
       highlights: [
-        'Full CRUD with filters by type and category',
-        'Routes organized in modules (transactions, categories, dashboard)',
-        'Next: PostgreSQL, JWT auth and Pytest tests',
+        'Entry classification: card payments, transfers between own accounts and pass-throughs are not counted as spending',
+        'Idempotent import and money stored as integer cents, never float',
+        'Per-category budget, upcoming installments and subscriptions, every money rule covered by tests',
+        'Decisions documented as ADRs; React + TypeScript interface, mobile-first with light and dark themes',
       ],
     },
   },
@@ -108,28 +111,28 @@ export const stack = {
     { group: 'Back-end', items: ['Python', 'FastAPI', 'Node.js', 'REST', 'Webhooks'] },
     { group: 'Dados', items: ['PostgreSQL', 'PL/pgSQL', 'SQLite', 'Modelagem relacional'] },
     { group: 'Front-end', items: ['React', 'TypeScript', 'Vite', 'Tailwind'] },
-    { group: 'Ferramentas', items: ['Git e GitHub', 'Docker', 'Testes (pgTAP, Node)', 'Agentes de IA no fluxo'] },
-    { group: 'Estudando', items: ['IA e Machine Learning', 'Testes automatizados', 'Autenticação JWT'] },
+    { group: 'Ferramentas', items: ['Git e GitHub', 'Docker', 'Testes (Pytest, pgTAP, Node)', 'Agentes de IA no fluxo'] },
+    { group: 'Estudando', items: ['IA e Machine Learning', 'Autenticação JWT', 'Deploy em nuvem'] },
   ],
   en: [
     { group: 'Back-end', items: ['Python', 'FastAPI', 'Node.js', 'REST', 'Webhooks'] },
     { group: 'Data', items: ['PostgreSQL', 'PL/pgSQL', 'SQLite', 'Relational modeling'] },
     { group: 'Front-end', items: ['React', 'TypeScript', 'Vite', 'Tailwind'] },
     { group: 'Tooling', items: ['Git & GitHub', 'Docker', 'Testing (pgTAP, Node)', 'AI agents in my workflow'] },
-    { group: 'Learning', items: ['AI & Machine Learning', 'Automated testing', 'JWT authentication'] },
+    { group: 'Learning', items: ['AI & Machine Learning', 'JWT authentication', 'Cloud deploy'] },
   ],
 }
 
 export const timeline = {
   pt: [
     { when: 'Mar 2026', title: 'Study Track', text: 'Primeiro projeto, com if, while e JSON.' },
-    { when: 'Abr 2026', title: 'Arkhé Finance', text: 'Do app de finanças para uma API REST publicada.' },
+    { when: 'Abr 2026', title: 'Arkhé Finance', text: 'De uma API de finanças ao app completo, com interface e testes.' },
     { when: '2026', title: 'Lifetrailer Studio', text: 'Sistema real, em produção, usado pela equipe de um estúdio.' },
     { when: 'Agora', title: 'IA e Machine Learning', text: 'Aprofundando back-end e dados rumo a IA.' },
   ],
   en: [
     { when: 'Mar 2026', title: 'Study Track', text: 'First project, with if, while and JSON.' },
-    { when: 'Apr 2026', title: 'Arkhé Finance', text: 'From a finance app to a deployed REST API.' },
+    { when: 'Apr 2026', title: 'Arkhé Finance', text: 'From a finance API to a complete app with UI and tests.' },
     { when: '2026', title: 'Lifetrailer Studio', text: 'A real system in production, used by a studio\'s team.' },
     { when: 'Now', title: 'AI & Machine Learning', text: 'Going deeper into back-end and data, heading to AI.' },
   ],
@@ -158,7 +161,7 @@ export const t = {
         { t: 'Foco', d: 'Uma coisa por vez, bem feita, com teste e documentação.' },
       ],
     },
-    projects: { eyebrow: '02 / projetos', title: 'Projetos', all: 'Todos', more: 'Detalhes', less: 'Fechar', repo: 'Código', demo: 'Demo' },
+    projects: { eyebrow: '02 / projetos', title: 'Projetos', all: 'Todos', more: 'Detalhes', less: 'Fechar', repo: 'Código', demo: 'Demo', private: 'Repositório privado' },
     stack: { eyebrow: '03 / stack', title: 'Tecnologias' },
     path: { eyebrow: '04 / trajetória', title: 'De onde vim e para onde vou' },
     contact: {
@@ -193,7 +196,7 @@ export const t = {
         { t: 'Focus', d: 'One thing at a time, done well, with tests and docs.' },
       ],
     },
-    projects: { eyebrow: '02 / projects', title: 'Projects', all: 'All', more: 'Details', less: 'Close', repo: 'Code', demo: 'Demo' },
+    projects: { eyebrow: '02 / projects', title: 'Projects', all: 'All', more: 'Details', less: 'Close', repo: 'Code', demo: 'Demo', private: 'Private repository' },
     stack: { eyebrow: '03 / stack', title: 'Technologies' },
     path: { eyebrow: '04 / path', title: 'Where I come from and where I\'m going' },
     contact: {
