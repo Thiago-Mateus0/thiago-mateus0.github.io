@@ -2,8 +2,8 @@ export type Lang = 'pt' | 'en'
 
 export const links = {
   github: 'https://github.com/Thiago-Mateus0',
-  linkedin: '', // TODO: preencher
-  email: '', // TODO: preencher
+  linkedin: 'https://www.linkedin.com/in/thiago-mateus-tech',
+  email: 'thiago.mateustech@gmail.com',
   cv: '', // TODO: colocar o PDF em public/ e apontar aqui (ex.: '/curriculo-tm.pdf')
 }
 
