@@ -63,7 +63,7 @@ function Curtain({ finish }: { finish: () => void }) {
     const b = setTimeout(finish, 1250)
     return () => { clearTimeout(a); clearTimeout(b) }
   }, [pct, finish])
-  const half = 'absolute left-0 right-0 h-1/2 bg-[#050607]'
+  const half = 'absolute left-0 right-0 h-1/2 bg-[#070c18]'
   return (
     <>
       <motion.div className={half + ' top-0'} animate={{ y: open ? '-100%' : 0 }} transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }} />
@@ -87,7 +87,7 @@ function Matrix({ finish }: { finish: () => void }) {
     const size = 16
     const drops = Array.from({ length: Math.ceil(c.width / size) }, () => Math.random() * -40)
     const id = setInterval(() => {
-      ctx.fillStyle = 'rgba(5,6,7,0.14)'
+      ctx.fillStyle = 'rgba(7,12,24,0.14)'
       ctx.fillRect(0, 0, c.width, c.height)
       ctx.fillStyle = '#5eead4'
       ctx.font = `${size}px monospace`
@@ -128,7 +128,7 @@ export default function Intro({ variant, lang, onDone }: Props) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[#050607]"
+      className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[#070c18]"
       style={{ background: variant === 'curtain' ? 'transparent' : undefined }}
       exit={{ opacity: 0, filter: 'blur(12px)' }}
       transition={{ duration: 0.55 }}
