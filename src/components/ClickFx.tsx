@@ -64,7 +64,7 @@ export default function ClickFx() {
     }
 
     const click = (e: PointerEvent) => {
-      if ((e.target as HTMLElement).closest('a,button,input,[role=dialog]')) return
+      if ((e.target as HTMLElement).closest('a,button,input,[role=dialog],[data-nofx]')) return
       if (!bag.length) bag = effects.map((_, i) => i).sort(() => Math.random() - 0.5)
       effects[bag.pop()!](e.clientX, e.clientY, colors())
       if (!raf) raf = requestAnimationFrame(frame)

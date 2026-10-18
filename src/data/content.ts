@@ -16,6 +16,8 @@ export interface Project {
   demo?: string
   private?: boolean // repo privado: sem link de código
   snippet: string[] // linhas decorativas do banner do card
+  live?: boolean // em produção, usado de verdade
+  visual: 'fsm' | 'chart' | 'term' // mini-visual animado do card
   pt: { tagline: string; description: string; highlights: string[] }
   en: { tagline: string; description: string; highlights: string[] }
 }
@@ -27,6 +29,8 @@ export const projects: Project[] = [
     year: '2026',
     tags: ['React', 'TypeScript', 'PostgreSQL', 'Node.js', 'Docker'],
     repo: 'https://github.com/Thiago-Mateus0/lifetrailer-studio',
+    live: true,
+    visual: 'fsm',
     snippet: ['comanda.abrir(cliente)', 'comanda.lancar(item)', "comanda.fechar()  // → 'fechada'"],
     pt: {
       tagline: 'Gestão operacional de um estúdio de fotografia, em produção.',
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     tags: ['Python', 'FastAPI', 'SQLite', 'React', 'TypeScript', 'Tailwind', 'Pytest'],
     repo: 'https://github.com/Thiago-Mateus0/finan-as',
     private: true,
+    visual: 'chart',
     snippet: ['classificar(lancamento)', 'if repasse: ignorar()', 'gasto_real = centavos(int)'],
     pt: {
       tagline: 'App de finanças pessoais que mostra para onde o dinheiro vai.',
@@ -86,6 +91,7 @@ export const projects: Project[] = [
     year: '2026',
     tags: ['Python', 'JSON', 'CLI'],
     repo: 'https://github.com/Thiago-Mateus0/Study-Track',
+    visual: 'term',
     snippet: ['while True:', '    topico = input()', '    salvar_json(topico, min)'],
     pt: {
       tagline: 'Meu primeiro código: acompanhar meus estudos.',
@@ -167,8 +173,8 @@ export const t = {
         { t: 'Foco', d: 'Uma coisa por vez, bem feita, com teste e documentação.' },
       ],
     },
-    projects: { eyebrow: '02 / projetos', title: 'Projetos', all: 'Todos', more: 'Detalhes', less: 'Fechar', repo: 'Código', demo: 'Demo', private: 'Repositório privado' },
-    stack: { eyebrow: '03 / stack', title: 'Tecnologias' },
+    projects: { eyebrow: '02 / projetos', title: 'Projetos', all: 'Todos', more: 'Detalhes', less: 'Fechar', repo: 'Código', demo: 'Demo', private: 'Repositório privado', live: 'em produção', fsm: ['abrir', 'lançar', 'fechar', 'comprovante'], next: { tag: 'próximo', title: 'Projeto de IA / ML', text: 'Em construção. É para onde estou indo: back-end e dados a serviço de modelos.' }, filtered: 'filtrando por', clear: 'limpar' },
+    stack: { eyebrow: '03 / stack', title: 'Tecnologias', hint: 'Clique numa tecnologia para ver os projetos que a usam.', see: 'ver projetos' },
     path: { eyebrow: '04 / trajetória', title: 'De onde vim e para onde vou' },
     contact: {
       eyebrow: '05 / contato',
@@ -177,13 +183,24 @@ export const t = {
       cv: 'Baixar currículo',
       soon: 'Em breve',
     },
-    stats: { projects: 'Projetos', tech: 'Tecnologias', langs: 'Idiomas' },
+    stats: { projects: 'Projetos', tech: 'Tecnologias', live: 'Em produção' },
     intro: {
       skip: 'clique ou Esc para pular',
       lines: ['$ ssh tm@maceio.dev', '> autenticando... ok', '> carregando projetos... ok', '> stack: python · typescript · sql', '> acesso liberado ✓'],
       role: 'Full Stack · Back-end & IA',
     },
-    copy: { idle: 'Copiar e-mail', done: 'Copiado ✓' },
+    copy: { idle: 'Copiar e-mail', done: 'E-mail copiado ✓' },
+    misc: { local: 'Maceió', top: 'Voltar ao topo', open: 'abrir', drag: 'ver' },
+    term: {
+      title: 'tm@portfolio: ~',
+      hello: 'Digite "ajuda" (ou toque num comando abaixo).',
+      notFound: 'comando não encontrado:',
+      quick: ['ajuda', 'sobre', 'projetos', 'contato', 'sudo contratar'],
+      help: ['ajuda      lista os comandos', 'sobre      quem sou eu', 'projetos   o que construí', 'stack      com o que trabalho', 'contato    como me achar', 'tema       troca claro/escuro', 'limpar     limpa a tela'],
+      about: ['Thiago Mateus (TM), Maceió, AL.', 'Estudante de Ciência da Computação, full stack com foco em back-end.', 'Rumo a IA e machine learning.'],
+      hire: ['[sudo] senha para recrutador: ********', 'permissão concedida ✓', 'próximo passo: thiago.mateustech@gmail.com'],
+      theme: 'tema trocado ✓',
+    },
     footer: 'Feito por TM · React + Vite · psst: tente ↑ ↑ ↓ ↓ ← → ← → B A',
     palette: { placeholder: 'Ir para…', theme: 'Alternar tema', lang: 'Mudar idioma (EN)', empty: 'Nada encontrado', intro: 'Rever abertura' },
   },
@@ -211,8 +228,8 @@ export const t = {
         { t: 'Focus', d: 'One thing at a time, done well, with tests and docs.' },
       ],
     },
-    projects: { eyebrow: '02 / projects', title: 'Projects', all: 'All', more: 'Details', less: 'Close', repo: 'Code', demo: 'Demo', private: 'Private repository' },
-    stack: { eyebrow: '03 / stack', title: 'Technologies' },
+    projects: { eyebrow: '02 / projects', title: 'Projects', all: 'All', more: 'Details', less: 'Close', repo: 'Code', demo: 'Demo', private: 'Private repository', live: 'in production', fsm: ['open', 'add items', 'close', 'receipt'], next: { tag: 'next', title: 'AI / ML project', text: 'Under construction. It is where I am heading: back-end and data serving models.' }, filtered: 'filtering by', clear: 'clear' },
+    stack: { eyebrow: '03 / stack', title: 'Technologies', hint: 'Click a technology to see the projects that use it.', see: 'see projects' },
     path: { eyebrow: '04 / path', title: 'Where I come from and where I\'m going' },
     contact: {
       eyebrow: '05 / contact',
@@ -221,13 +238,24 @@ export const t = {
       cv: 'Download résumé',
       soon: 'Coming soon',
     },
-    stats: { projects: 'Projects', tech: 'Technologies', langs: 'Languages' },
+    stats: { projects: 'Projects', tech: 'Technologies', live: 'In production' },
     intro: {
       skip: 'click or Esc to skip',
       lines: ['$ ssh tm@maceio.dev', '> authenticating... ok', '> loading projects... ok', '> stack: python · typescript · sql', '> access granted ✓'],
       role: 'Full Stack · Back-end & AI',
     },
-    copy: { idle: 'Copy e-mail', done: 'Copied ✓' },
+    copy: { idle: 'Copy e-mail', done: 'E-mail copied ✓' },
+    misc: { local: 'Maceió', top: 'Back to top', open: 'open', drag: 'view' },
+    term: {
+      title: 'tm@portfolio: ~',
+      hello: 'Type "help" (or tap a command below).',
+      notFound: 'command not found:',
+      quick: ['help', 'about', 'projects', 'contact', 'sudo hire'],
+      help: ['help       list commands', 'about      who I am', 'projects   what I built', 'stack      what I work with', 'contact    how to reach me', 'theme      toggle light/dark', 'clear      clear the screen'],
+      about: ['Thiago Mateus (TM), Maceió, Brazil.', 'Computer Science student, full stack focused on back-end.', 'Heading to AI and machine learning.'],
+      hire: ['[sudo] password for recruiter: ********', 'permission granted ✓', 'next step: thiago.mateustech@gmail.com'],
+      theme: 'theme switched ✓',
+    },
     footer: 'Built by TM · React + Vite · psst: try ↑ ↑ ↓ ↓ ← → ← → B A',
     palette: { placeholder: 'Go to…', theme: 'Toggle theme', lang: 'Switch language (PT)', empty: 'Nothing found', intro: 'Replay intro' },
   },
