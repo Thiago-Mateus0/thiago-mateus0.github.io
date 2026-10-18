@@ -1,4 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import tm from '../assets/tm.jpg'
+import tmSmall from '../assets/tm-small.jpg'
 
 /** Foto com anel de degradê girando, inclinação 3D com o mouse e brilho que acompanha o cursor. */
 export default function Portrait({ caption }: { caption: string }) {
@@ -28,7 +30,7 @@ export default function Portrait({ caption }: { caption: string }) {
       </div>
       <div className="relative overflow-hidden rounded-[1.25rem] bg-surface">
         <img
-          src="/tm.jpg" srcSet="/tm-small.jpg 360w, /tm.jpg 720w" sizes="(min-width: 768px) 288px, 256px"
+          src={tm} srcSet={`${tmSmall} 360w, ${tm} 720w`} sizes="(min-width: 768px) 288px, 256px"
           width={720} height={900} loading="lazy" decoding="async"
           alt="Foto de Thiago Mateus (TM)"
           className="block h-auto w-full transition duration-500 group-hover:scale-105"

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({ plugins: [react()] })
+// base relativa: o build funciona na raiz de um domínio ou dentro de uma subpasta
+export default defineConfig({ base: './', plugins: [react()] })
