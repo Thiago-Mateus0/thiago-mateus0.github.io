@@ -34,7 +34,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.job, .metrics li, .projects li, .services article, .toolbox > div')
+document.querySelectorAll('.job, .metrics li, .rows > li, .services article, .toolbox > div')
   .forEach((el) => { el.classList.add('reveal'); revealObserver.observe(el); });
 
 // Hora local ao vivo na barra lateral
@@ -64,20 +64,23 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const root = document.documentElement;
 const themeBtn = document.querySelector('.theme-toggle');
 const currentTheme = () => root.dataset.theme
-  || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-const applyTheme = (theme) => {
-  root.dataset.theme = theme;
-  themeBtn.textContent = theme === 'light' ? '☾' : '☀';
+  || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const markTheme = () => {
+  const theme = currentTheme();
+  themeBtn.querySelectorAll('[data-theme-label]').forEach((el) => {
+    el.classList.toggle('current', el.dataset.themeLabel === theme);
+  });
 };
 
 try {
   const saved = localStorage.getItem('theme');
-  if (saved) applyTheme(saved);
+  if (saved) root.dataset.theme = saved;
 } catch {}
-themeBtn.textContent = currentTheme() === 'light' ? '☾' : '☀';
+markTheme();
 
 themeBtn.addEventListener('click', () => {
   const next = currentTheme() === 'light' ? 'dark' : 'light';
-  applyTheme(next);
+  root.dataset.theme = next;
+  markTheme();
   try { localStorage.setItem('theme', next); } catch {}
 });
