@@ -64,23 +64,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const root = document.documentElement;
 const themeBtn = document.querySelector('.theme-toggle');
 const currentTheme = () => root.dataset.theme
-  || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-const markTheme = () => {
-  const theme = currentTheme();
-  themeBtn.querySelectorAll('[data-theme-label]').forEach((el) => {
-    el.classList.toggle('current', el.dataset.themeLabel === theme);
-  });
+  || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+const applyTheme = (theme) => {
+  root.dataset.theme = theme;
+  themeBtn.textContent = theme === 'light' ? '☾' : '☀';
 };
 
 try {
   const saved = localStorage.getItem('theme');
-  if (saved) root.dataset.theme = saved;
+  if (saved) applyTheme(saved);
 } catch {}
-markTheme();
+themeBtn.textContent = currentTheme() === 'light' ? '☾' : '☀';
 
 themeBtn.addEventListener('click', () => {
   const next = currentTheme() === 'light' ? 'dark' : 'light';
-  root.dataset.theme = next;
-  markTheme();
+  applyTheme(next);
   try { localStorage.setItem('theme', next); } catch {}
 });

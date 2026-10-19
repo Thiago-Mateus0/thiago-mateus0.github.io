@@ -7,7 +7,7 @@
   <meta name="description" content="Portfólio de Thiago Mateus — experiência, projetos e contato.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,7 +26,10 @@
       <p class="location"><span class="dot" aria-hidden="true"></span>[Sua cidade] · <span id="local-time">UTC−3</span></p>
     </div>
 
-    <button class="nav-toggle mono" aria-expanded="false" aria-controls="nav">menu</button>
+    <div class="controls">
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">☀</button>
+      <button class="nav-toggle mono" aria-expanded="false" aria-controls="nav">menu</button>
+    </div>
     <nav id="nav" class="nav" aria-label="Seções">
       <ol>
         <li><a href="#experience"><span class="mono">01</span>Experiência</a></li>
@@ -51,22 +54,17 @@
     </div>
   </header>
 
-  <!-- Alternância de tema (canto superior direito) -->
-  <button class="theme-toggle mono" type="button" aria-label="Alternar tema claro/escuro">
-    <span class="theme-labels"><span data-theme-label="light">claro</span> / <span data-theme-label="dark">escuro</span></span><span class="theme-icon" aria-hidden="true">◐</span>
-  </button>
-
   <main id="main">
     <!-- HERO -->
     <section id="hero" class="hero">
       <div class="wrap">
         <p class="eyebrow mono">thiago mateus / [sua função]</p>
-        <h1>[Uma frase curta.<br>Com personalidade.]</h1>
+        <h1>[Uma frase curta.<br>Com <em>personalidade.</em>]</h1>
         <p class="highlight mono">[Um detalhe honesto e divertido sobre você.]</p>
         <p class="lead">[Duas ou três linhas sobre o que você constrói e para quem. Seja específico: tecnologias, tipo de problema, resultado.]</p>
         <div class="links">
-          <a class="link link-strong" href="#experience">ver o trabalho ↓</a>
-          <a class="link" href="https://github.com/thiago-mateus0" target="_blank" rel="noopener">ver o código ↗</a>
+          <a class="btn btn-primary" href="#experience">ver o trabalho ↓</a>
+          <a class="btn" href="https://github.com/thiago-mateus0" target="_blank" rel="noopener">ver o código ↗</a>
         </div>
       </div>
     </section>
@@ -151,7 +149,7 @@
     <section id="toolbox" class="section">
       <div class="wrap">
         <p class="eyebrow mono">03 / ferramentas</p>
-        <h2>Tecnologias que aparecem<br>no trabalho.</h2>
+        <h2>Tecnologias que aparecem<br>no <em>trabalho.</em></h2>
         <p class="section-lead">Agrupadas pelo que eu faço com cada uma.</p>
         <dl class="toolbox">
           <div><dt>Front-end</dt><dd><ul class="chips"><li>[tec principal]</li><li>[tec]</li><li>[tec]</li></ul></dd></div>
@@ -166,7 +164,7 @@
     <section id="services" class="section">
       <div class="wrap">
         <p class="eyebrow mono">04 / serviços</p>
-        <h2>Os problemas<br>que eu resolvo.</h2>
+        <h2>Os problemas<br>que eu <em>resolvo.</em></h2>
         <p class="section-lead">[Onde você trabalha e com que tipo de equipe já atuou.]</p>
         <div class="services">
           <article>
@@ -181,8 +179,8 @@
           </article>
         </div>
         <div class="links">
-          <a class="link link-strong" href="#contact">conversar sobre um projeto ↓</a>
-          <a class="link" href="#experience">ver a experiência ↑</a>
+          <a class="btn btn-primary" href="#contact">conversar sobre um projeto ↓</a>
+          <a class="btn" href="#experience">ver a experiência ↑</a>
         </div>
       </div>
     </section>
@@ -191,7 +189,7 @@
     <section id="writing" class="section">
       <div class="wrap">
         <p class="eyebrow mono">05 / artigos</p>
-        <h2>O que eu aprendi,<br>por escrito.</h2>
+        <h2>O que eu aprendi,<br><em>por escrito.</em></h2>
         <p class="section-lead">Textos curtos sobre o que eu construí e o que deu errado no caminho.</p>
         <ol class="rows">
           <li class="post">
@@ -217,8 +215,8 @@
         <h2>[Tem um problema<br>difícil?]</h2>
         <p class="section-lead">[Que tipo de projeto ou vaga te interessa mais.]</p>
         <div class="links">
-          <a class="link link-strong" href="mailto:[seu-email]">mandar e-mail ↗</a>
-          <a class="link" href="[seu-linkedin]" target="_blank" rel="noopener">ver LinkedIn ↗</a>
+          <a class="btn btn-primary" href="mailto:[seu-email]">mandar e-mail ↗</a>
+          <a class="btn" href="[seu-linkedin]" target="_blank" rel="noopener">ver LinkedIn ↗</a>
         </div>
         <button class="copy mono" type="button" data-copy="[seu-email]">[seu-email] <span>copiar</span></button>
       </div>
