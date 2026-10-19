@@ -34,7 +34,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.job, .metrics li, .rows > li, .services article, .toolbox > div')
+document.querySelectorAll('.job, .rows > li, .services article, .toolbox > div')
   .forEach((el) => { el.classList.add('reveal'); revealObserver.observe(el); });
 
 // Hora local ao vivo na barra lateral
