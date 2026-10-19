@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thiago Mateus · Portfólio</title>
+  <meta name="description" content="Portfólio de Thiago Mateus — experiência, projetos e contato.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+  <!-- Barra lateral fixa: identidade + navegação numerada -->
+  <header class="sidebar">
+    <a class="brand" href="#hero">
+      <span class="brand-mark">T</span>
+      <span>
+        <strong>Thiago Mateus</strong>
+        <small>[sua função]</small>
+      </span>
+    </a>
+    <p class="meta mono">[Sua cidade] · <span id="local-time">UTC−3</span></p>
+
+    <div class="controls">
+      <button class="theme-toggle mono" type="button" aria-label="Alternar tema claro/escuro">☀</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+    <nav id="nav" class="nav">
+      <ol>
+        <li><a href="#experience"><span class="mono">01</span>Experiência</a></li>
+        <li><a href="#projects"><span class="mono">02</span>Projetos</a></li>
+        <li><a href="#toolbox"><span class="mono">03</span>Ferramentas</a></li>
+        <li><a href="#services"><span class="mono">04</span>Serviços</a></li>
+        <li><a href="#writing"><span class="mono">05</span>Artigos</a></li>
+        <li><a href="#contact"><span class="mono">06</span>Contato</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <p class="status mono"><span class="dot" aria-hidden="true"></span>aberto a novas oportunidades</p>
+      <p class="eyebrow mono">thiago mateus / [sua função]</p>
+      <h1>[Uma frase curta e com personalidade sobre você.]</h1>
+      <p class="lead">[Duas linhas sobre o que você constrói e para quem. Seja específico: tecnologias, tipo de problema, resultado.]</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#experience">ver o trabalho ↓</a>
+        <a class="btn" href="https://github.com/thiago-mateus0" target="_blank" rel="noopener">ver o código ↗</a>
+      </div>
+
+      <!-- Métricas com link para o contexto que as comprova -->
+      <ul class="metrics">
+        <li><a href="#exp-1"><strong>[N]+</strong><span>[o que esse número mede]</span><em class="mono">[Empresa · contexto] ↗</em></a></li>
+        <li><a href="#exp-1"><strong>[N]%</strong><span>[o que esse número mede]</span><em class="mono">[Empresa · contexto] ↗</em></a></li>
+        <li><a href="#projects"><strong>[N]</strong><span>[projetos publicados]</span><em class="mono">[ver projetos] ↗</em></a></li>
+      </ul>
+      <p class="aside mono">↳ Números sem contexto são decoração. O contexto está logo abaixo.</p>
+    </section>
+
+    <!-- 01 EXPERIÊNCIA -->
+    <section id="experience" class="section">
+      <p class="eyebrow mono">01 / experiência</p>
+      <h2>[Título forte para a seção.]</h2>
+      <p class="section-lead">Não uma lista de responsabilidades: os sistemas, decisões e resultados que foram meus.</p>
+
+      <article class="job" id="exp-1">
+        <header class="job-head">
+          <span class="job-index mono">01</span>
+          <div>
+            <h3>[Empresa]</h3>
+            <p class="job-role">[Cargo]</p>
+          </div>
+          <p class="job-meta mono">[mês/ano] — atual<br>[local · remoto]</p>
+        </header>
+        <p>[Resumo de uma ou duas frases do seu papel.]</p>
+        <ul class="chips">
+          <li>[métrica 1]</li><li>[métrica 2]</li><li>[área]</li>
+        </ul>
+        <div class="sub">
+          <p class="sub-index mono">1.1</p>
+          <h4>[Projeto ou frente de trabalho]</h4>
+          <ul class="bullets">
+            <li>[O que você fez + como + qual foi o impacto.]</li>
+            <li>[O que você fez + como + qual foi o impacto.]</li>
+          </ul>
+        </div>
+      </article>
+
+      <p class="quote mono">[Uma frase curta e bem-humorada sobre o seu trabalho.]</p>
+
+      <article class="job" id="exp-2">
+        <header class="job-head">
+          <span class="job-index mono">02</span>
+          <div>
+            <h3>[Empresa]</h3>
+            <p class="job-role">[Cargo]</p>
+          </div>
+          <p class="job-meta mono">[mês/ano] — [mês/ano]<br>[local]</p>
+        </header>
+        <p>[Resumo do papel.]</p>
+        <ul class="chips"><li>[métrica]</li><li>[tecnologia]</li></ul>
+        <ul class="bullets">
+          <li>[Conquista com número.]</li>
+          <li>[Conquista com número.]</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- 02 PROJETOS -->
+    <section id="projects" class="section">
+      <p class="eyebrow mono">02 / projetos</p>
+      <h2>Projetos fora do expediente.</h2>
+      <p class="section-lead">Menos discurso, mais link.</p>
+
+      <ol class="projects">
+        <li><a href="#" target="_blank" rel="noopener">
+          <span class="mono p-index">01</span>
+          <span class="p-name">[Projeto]</span>
+          <span class="p-tag mono">[produto]</span>
+          <span class="p-desc">[O que ele faz, em uma frase.]</span>
+          <span class="p-stack mono">[Stack · Stack · Stack]</span>
+          <span class="p-open mono">abrir ↗</span>
+        </a></li>
+        <li><a href="#" target="_blank" rel="noopener">
+          <span class="mono p-index">02</span>
+          <span class="p-name">[Projeto]</span>
+          <span class="p-tag mono">[experimento]</span>
+          <span class="p-desc">[O que ele faz, em uma frase.]</span>
+          <span class="p-stack mono">[Stack · Stack]</span>
+          <span class="p-open mono">abrir ↗</span>
+        </a></li>
+      </ol>
+      <a class="more mono" href="https://github.com/thiago-mateus0" target="_blank" rel="noopener">todos os repositórios ↗</a>
+    </section>
+
+    <!-- 03 FERRAMENTAS -->
+    <section id="toolbox" class="section">
+      <p class="eyebrow mono">03 / ferramentas</p>
+      <h2>Tecnologias que aparecem no trabalho.</h2>
+      <p class="section-lead">Sem bingo de logos: agrupadas pelo que eu faço com elas.</p>
+      <div class="toolbox">
+        <div><h3 class="mono">Front-end</h3><ul class="chips"><li>[tec]</li><li>[tec]</li><li>[tec]</li></ul></div>
+        <div><h3 class="mono">Back-end</h3><ul class="chips"><li>[tec]</li><li>[tec]</li><li>[tec]</li></ul></div>
+        <div><h3 class="mono">Dados</h3><ul class="chips"><li>[tec]</li><li>[tec]</li></ul></div>
+        <div><h3 class="mono">Infra &amp; entrega</h3><ul class="chips"><li>[tec]</li><li>[tec]</li></ul></div>
+      </div>
+    </section>
+
+    <!-- 04 SERVIÇOS -->
+    <section id="services" class="section">
+      <p class="eyebrow mono">04 / serviços</p>
+      <h2>Os problemas que eu resolvo.</h2>
+      <div class="services">
+        <article>
+          <h3>[Serviço 1]</h3>
+          <p>[Como você resolve esse problema e com quais ferramentas.]</p>
+          <a class="mono" href="#exp-1">[Empresa: onde você já fez isso] ↗</a>
+        </article>
+        <article>
+          <h3>[Serviço 2]</h3>
+          <p>[Como você resolve esse problema e com quais ferramentas.]</p>
+          <a class="mono" href="#exp-2">[Empresa: onde você já fez isso] ↗</a>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">conversar sobre um projeto ↓</a>
+        <a class="btn" href="#experience">ver a experiência ↑</a>
+      </div>
+    </section>
+
+    <!-- 05 ARTIGOS -->
+    <section id="writing" class="section">
+      <p class="eyebrow mono">05 / artigos</p>
+      <h2>O que eu aprendi, por escrito.</h2>
+      <p class="section-lead">Textos curtos sobre o que eu construí e o que deu errado no caminho.</p>
+      <ol class="posts">
+        <li>
+          <p class="post-meta mono"><time datetime="2026-10-01">[01 out. 2026]</time> · [5] min de leitura</p>
+          <h3><a href="#">[Título do artigo]</a></h3>
+          <p>[Primeira frase do texto: um gancho que faça a pessoa querer continuar lendo.]</p>
+          <a class="post-more mono" href="#">ler mais →</a>
+        </li>
+        <li>
+          <p class="post-meta mono"><time datetime="2026-09-15">[15 set. 2026]</time> · [8] min de leitura</p>
+          <h3><a href="#">[Título do artigo]</a></h3>
+          <p>[Primeira frase do texto.]</p>
+          <a class="post-more mono" href="#">ler mais →</a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 06 CONTATO -->
+    <section id="contact" class="section contact">
+      <p class="eyebrow mono">06 / contato</p>
+      <h2>[Tem um problema difícil? Chamada direta aqui.]</h2>
+      <p class="section-lead">[Que tipo de projeto ou vaga te interessa mais.]</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:[seu-email]">mandar um e-mail ↗</a>
+        <a class="btn" href="[seu-linkedin]" target="_blank" rel="noopener">ver o LinkedIn ↗</a>
+      </div>
+      <button class="copy mono" data-copy="[seu-email]">[seu-email] <span>copiar</span></button>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-cols">
+        <div>
+          <h3 class="mono">Acompanhe</h3>
+          <ul>
+            <li><a href="https://github.com/thiago-mateus0" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="[seu-linkedin]" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mono">Explorar</h3>
+          <ul>
+            <li><a href="#experience">Experiência</a></li>
+            <li><a href="#projects">Projetos</a></li>
+            <li><a href="#writing">Artigos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mono">Comece por aqui</h3>
+          <ul>
+            <li><a href="[link-curriculo]">Currículo (PDF)</a></li>
+            <li><a href="#contact">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom mono">
+        <span>thiago mateus · <span id="year">2026</span></span>
+        <a href="#hero">voltar ao topo ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
