@@ -1,0 +1,111 @@
+---
+import { profile, projects, focus } from "../data/content";
+const data = {
+  profile,
+  focus,
+  projects: projects.map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    desc: p.desc,
+    stack: p.stack,
+    tags: p.tags,
+    ai: p.ai ? { name: p.ai.name, desc: p.ai.desc } : null,
+  })),
+};
+---
+
+<div
+  id="term"
+  data-info={JSON.stringify(data)}
+  class="rounded border border-zinc-800 bg-black/40 p-4 text-sm"
+>
+  <div id="term-out" class="max-h-72 space-y-1 overflow-y-auto whitespace-pre-wrap" aria-live="polite"></div>
+  <form id="term-form" class="mt-2 flex gap-2" autocomplete="off">
+    <label for="term-in" class="text-emerald-400">$</label>
+    <input
+      id="term-in"
+      class="flex-1 bg-transparent outline-none placeholder:text-zinc-600"
+      placeholder="help"
+      spellcheck="false"
+    />
+  </form>
+</div>
+
+<script>
+  const root = document.getElementById("term")!;
+  const info = JSON.parse(root.dataset.info!);
+  const out = document.getElementById("term-out")!;
+  const form = document.getElementById("term-form") as HTMLFormElement;
+  const input = document.getElementById("term-in") as HTMLInputElement;
+
+  const lang = () => (document.documentElement.lang === "en" ? "en" : "pt") as "pt" | "en";
+  const t = (o: { pt: string; en: string }) => o[lang()];
+
+  const print = (text: string, cls = "text-zinc-300") => {
+    const p = document.createElement("p");
+    p.className = cls;
+    p.textContent = text;
+    out.appendChild(p);
+    out.scrollTop = out.scrollHeight;
+  };
+
+  const help = {
+    pt: "comandos: help, about, ls, cat <projeto>, stack, contact, lang pt|en, clear",
+    en: "commands: help, about, ls, cat <project>, stack, contact, lang pt|en, clear",
+  };
+
+  const run = (line: string) => {
+    print("$ " + line, "text-emerald-400");
+    const [cmd, ...args] = line.trim().split(/\s+/);
+    const arg = args.join(" ").toLowerCase();
+    switch (cmd?.toLowerCase()) {
+      case "":
+      case undefined:
+        return;
+      case "help":
+        return print(t(help));
+      case "about":
+        return print(`${info.profile.name} — ${t(info.profile.role)}\n${t(info.profile.bio)}\n> ${t(info.focus)}`);
+      case "ls":
+        return print(info.projects.map((p: any) => p.slug + "/").join("  "));
+      case "cat": {
+        const p = info.projects.find((x: any) => x.slug === arg || x.name.toLowerCase() === arg);
+        if (!p)
+          return print(
+            lang() === "pt" ? `cat: ${arg || "?"}: projeto não encontrado (use ls)` : `cat: ${arg || "?"}: project not found (try ls)`,
+            "text-red-400",
+          );
+        const ai = p.ai ? `\n[AI] ${p.ai.name}` : "";
+        return print(`${p.name}\n${t(p.desc)}\n${p.stack.join(" · ")}${ai}`);
+      }
+      case "stack": {
+        const all = [...new Set(info.projects.flatMap((p: any) => p.stack))];
+        return print(all.join(" · "));
+      }
+      case "contact":
+        return print(`github: ${info.profile.github}\nlinkedin: ${info.profile.linkedin}`);
+      case "lang": {
+        if (arg !== "pt" && arg !== "en") return print("lang pt|en", "text-red-400");
+        document.documentElement.lang = arg;
+        localStorage.setItem("lang", arg);
+        return print(`lang = ${arg}`);
+      }
+      case "clear":
+        out.replaceChildren();
+        return;
+      default:
+        return print(
+          lang() === "pt" ? `${cmd}: comando não encontrado. Digite help.` : `${cmd}: command not found. Type help.`,
+          "text-red-400",
+        );
+    }
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    run(input.value);
+    input.value = "";
+  });
+
+  print(t({ pt: "Digite help para ver os comandos.", en: "Type help to see the commands." }), "text-zinc-500");
+</script>
