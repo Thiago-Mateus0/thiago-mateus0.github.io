@@ -3,104 +3,283 @@ import Layout from "../layouts/Layout.astro";
 import T from "../components/T.astro";
 import Terminal from "../components/Terminal.astro";
 import { profile, projects, focus, timeline, learning } from "../data/content";
+
+const stack = [...new Set(projects.flatMap((p) => p.stack))];
+const aiCount = projects.filter((p) => p.tags.includes("ai")).length;
+const head = timeline[0];
+
+type Unit = {
+  id: string;
+  u: string;
+  name: string;
+  status: { pt: string; en: string };
+  led: "green" | "amber";
+};
+
+const units: Unit[] = [
+  {
+    id: "projetos",
+    u: "U01",
+    name: "projects/",
+    status: {
+      pt: `${projects.length} projetos · ${aiCount} com IA`,
+      en: `${projects.length} projects · ${aiCount} with AI`,
+    },
+    led: "green",
+  },
+  {
+    id: "stack",
+    u: "U02",
+    name: "stack.txt",
+    status: { pt: `${stack.length} tecnologias`, en: `${stack.length} technologies` },
+    led: "green",
+  },
+  {
+    id: "trajetoria",
+    u: "U03",
+    name: "git log",
+    status: {
+      pt: `HEAD · ${head?.place ?? "—"}`,
+      en: `HEAD · ${head?.place ?? "—"}`,
+    },
+    led: "green",
+  },
+  {
+    id: "terminal",
+    u: "U04",
+    name: "ssh visitor@",
+    status: { pt: "terminal interativo", en: "interactive terminal" },
+    led: "amber",
+  },
+  {
+    id: "contato",
+    u: "U05",
+    name: "contact --open",
+    status: { pt: "disponível para conversar", en: "open to talk" },
+    led: "green",
+  },
+];
 ---
 
 <Layout title={`${profile.name} — ${profile.role.en}`}>
-  <header class="mx-auto flex max-w-3xl items-center justify-between px-6 py-6 text-sm text-zinc-500">
-    <span>{profile.location}</span>
-    <div class="flex gap-2">
-      <button data-set-lang="pt" class="hover:text-emerald-400">PT</button>
-      <span>/</span>
-      <button data-set-lang="en" class="hover:text-emerald-400">EN</button>
+  <div class="shell">
+    <header class="top">
+      <span class="logo">thiago<span class="text-emerald-400">.dev</span><span class="caret">_</span></span>
+      <div class="flex items-center gap-4 text-xs text-zinc-500">
+        <span class="hidden sm:inline">rack sp-01 · {profile.location}</span>
+        <div class="flex gap-2">
+          <button data-set-lang="pt" class="lang-btn">PT</button>
+          <span>/</span>
+          <button data-set-lang="en" class="lang-btn">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="rack" aria-label="Rack">
+      <div class="rail rail-l" aria-hidden="true"></div>
+      <div class="rail rail-r" aria-hidden="true"></div>
+
+      <section class="unit unit-hero">
+        <p class="text-emerald-400">$ whoami</p>
+        <h1 class="typing mt-2 text-3xl font-bold sm:text-5xl">{profile.name}</h1>
+        <p class="mt-1 text-zinc-400"><T t={profile.role} /></p>
+        <p class="mt-4 max-w-xl text-sm text-zinc-300"><T t={profile.bio} /></p>
+        <p class="mt-2 text-sm text-emerald-400">&gt; <T t={focus} /></p>
+        <div class="mt-5 flex flex-wrap gap-2 text-xs">
+          <a class="chip" href={profile.github} target="_blank" rel="noopener">github ↗</a>
+          <a class="chip" href={profile.linkedin} target="_blank" rel="noopener">linkedin ↗</a>
+          <a class="chip" href="/curriculo-thiago-mateus.pdf" download>
+            <T t={{ pt: "currículo ↓", en: "résumé ↓" }} />
+          </a>
+        </div>
+      </section>
+
+      {units.map((m, i) => (
+        <button class="unit unit-mod" data-open={m.id} type="button">
+          <span class="u-id">{m.u}</span>
+          <span class={`led led-${m.led}`} aria-hidden="true"></span>
+          <span class="u-name">{m.name}</span>
+          <span class="u-status"><T t={m.status} /></span>
+          <span class="u-go"><kbd>{i + 1}</kbd> <T t={{ pt: "entrar", en: "enter" }} /> →</span>
+          <span class="u-vents" aria-hidden="true"></span>
+        </button>
+      ))}
+    </main>
+
+    <p class="hint">
+      <T
+        t={{
+          pt: "clique num módulo ou aperte 1–5 · esc para voltar ao rack",
+          en: "click a module or press 1–5 · esc to return to the rack",
+        }}
+      />
+    </p>
+  </div>
+
+  <dialog id="room" class="room" aria-label="Módulo">
+    <div class="room-bar">
+      <span class="text-emerald-400" id="room-title">~</span>
+      <button id="room-close" type="button" class="chip">
+        <T t={{ pt: "voltar ao rack", en: "back to rack" }} /> <kbd>esc</kbd>
+      </button>
     </div>
-  </header>
 
-  <main class="mx-auto max-w-3xl space-y-16 px-6 pb-24">
-    <section>
-      <p class="text-emerald-400">$ whoami</p>
-      <h1 class="typing mt-2 text-4xl font-bold">{profile.name}</h1>
-      <p class="mt-1 text-zinc-400"><T t={profile.role} /></p>
-      <p class="mt-4 max-w-xl"><T t={profile.bio} /></p>
-      <p class="mt-2 text-sm text-emerald-400">&gt; <T t={focus} /></p>
-      <div class="mt-6 flex gap-4 text-sm">
-        <a class="underline hover:text-emerald-400" href={profile.github}>github</a>
-        <a class="underline hover:text-emerald-400" href={profile.linkedin}>linkedin</a>
-        <a class="underline hover:text-emerald-400" href="/curriculo-thiago-mateus.pdf" download>
-          <T t={{ pt: "currículo", en: "résumé" }} />
-        </a>
-      </div>
-    </section>
-
-    <section>
-      <p class="text-emerald-400">$ ls projects/</p>
-      <div class="mt-3 flex gap-2 text-xs">
-        <button data-filter="all" data-active class="rounded border border-zinc-700 px-2 py-1">all</button>
-        <button data-filter="web" class="rounded border border-zinc-700 px-2 py-1">web</button>
-        <button data-filter="ai" class="rounded border border-zinc-700 px-2 py-1">ai</button>
-      </div>
-
-      <div class="mt-6 space-y-4">
-        {projects.map((p) => (
-          <article data-tags={p.tags.join(" ")} class="rounded border border-zinc-800 p-5">
-            <div class="flex items-center gap-2">
-              <h2 class="text-lg font-semibold">{p.name}</h2>
-              {p.tags.includes("ai") && (
-                <span class="rounded bg-emerald-400/10 px-2 py-0.5 text-xs text-emerald-400">AI</span>
-              )}
-            </div>
-            <p class="mt-2 text-sm text-zinc-400"><T t={p.desc} /></p>
-            {p.stack.length > 0 && (
-              <p class="mt-2 text-xs text-zinc-500">{p.stack.join(" · ")}</p>
-            )}
-            {p.ai && (
-              <div class="mt-4 border-l-2 border-emerald-400 pl-4">
-                <p class="text-sm font-semibold text-emerald-400">
-                  <T t={{ pt: "Módulo de IA", en: "AI module" }} />: {p.ai.name}
-                </p>
-                <p class="mt-1 text-sm text-zinc-400"><T t={p.ai.desc} /></p>
-                <p class="mt-2 text-xs text-zinc-500">{p.ai.stack.join(" · ")}</p>
+    <div class="room-body">
+      <!-- U01 projetos -->
+      <section data-panel="projetos" hidden>
+        <p class="panel-cmd">$ ls projects/</p>
+        <div class="mt-3 flex gap-2 text-xs">
+          <button data-filter="all" data-active class="rounded border border-zinc-700 px-2 py-1">all</button>
+          <button data-filter="web" class="rounded border border-zinc-700 px-2 py-1">web</button>
+          <button data-filter="ai" class="rounded border border-zinc-700 px-2 py-1">ai</button>
+        </div>
+        <div class="mt-6 grid gap-4 lg:grid-cols-2">
+          {projects.map((p) => (
+            <article data-tags={p.tags.join(" ")} class="card">
+              <div class="flex items-center gap-2">
+                <h2 class="text-lg font-semibold">{p.name}</h2>
+                {p.tags.includes("ai") && (
+                  <span class="rounded bg-emerald-400/10 px-2 py-0.5 text-xs text-emerald-400">AI</span>
+                )}
               </div>
-            )}
-          </article>
-        ))}
-      </div>
-    </section>
+              <p class="mt-2 text-sm text-zinc-400"><T t={p.desc} /></p>
+              {p.stack.length > 0 && <p class="mt-3 text-xs text-zinc-500">{p.stack.join(" · ")}</p>}
+              {p.ai && (
+                <details class="mt-4 border-l-2 border-emerald-400 pl-4">
+                  <summary class="cursor-pointer text-sm font-semibold text-emerald-400">
+                    <T t={{ pt: "Módulo de IA", en: "AI module" }} />: {p.ai.name}
+                  </summary>
+                  <p class="mt-2 text-sm text-zinc-400"><T t={p.ai.desc} /></p>
+                  <p class="mt-2 text-xs text-zinc-500">{p.ai.stack.join(" · ")}</p>
+                </details>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
 
-    <section>
-      <p class="text-emerald-400">$ cat stack.txt</p>
-      <p class="mt-2 text-sm text-zinc-400">
-        {[...new Set(projects.flatMap((p) => p.stack))].join(" · ")}
-      </p>
-      <p class="mt-3 text-sm">
-        <span class="text-emerald-400">learning:</span> {learning.join(" · ")}
-      </p>
-    </section>
+      <!-- U02 stack -->
+      <section data-panel="stack" hidden>
+        <p class="panel-cmd">$ cat stack.txt</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {stack.map((s) => <span class="chip">{s}</span>)}
+        </div>
+        <p class="panel-cmd mt-10">$ echo $LEARNING</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {learning.map((s) => <span class="chip chip-hot">{s}</span>)}
+        </div>
+      </section>
 
-    {timeline.length > 0 && (
-      <section>
-        <p class="text-emerald-400">$ git log --oneline</p>
-        <ul class="mt-3 space-y-3 text-sm">
-          {timeline.map((i) => (
+      <!-- U03 trajetória -->
+      <section data-panel="trajetoria" hidden>
+        <p class="panel-cmd">$ git log --oneline</p>
+        <ol class="log mt-6">
+          {timeline.map((i, idx) => (
             <li>
-              <span class="text-zinc-500">{i.period}</span> —
-              <T t={i.title} />{i.place && <span class="text-zinc-500"> @ {i.place}</span>}
+              <span class="dot" aria-hidden="true"></span>
+              <p class="text-xs text-zinc-500">
+                {idx === 0 && <span class="text-emerald-400">HEAD → </span>}{i.period}
+                <span class="ml-2 rounded border border-zinc-700 px-1.5">{i.kind === "work" ? "work" : "edu"}</span>
+              </p>
+              <p class="mt-1"><T t={i.title} /></p>
+              {i.place && <p class="text-sm text-zinc-500">@ {i.place}</p>}
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
-    )}
 
-    <section>
-      <p class="text-emerald-400">$ ssh visitor@portfolio</p>
-      <div class="mt-3"><Terminal /></div>
-    </section>
+      <!-- U04 terminal -->
+      <section data-panel="terminal" hidden>
+        <p class="panel-cmd">$ ssh visitor@portfolio</p>
+        <div class="mt-4"><Terminal /></div>
+      </section>
 
-    <section>
-      <p class="text-emerald-400">$ contact --open</p>
-      <p class="mt-2 text-sm text-zinc-400">
-        <T t={{ pt: "Vamos conversar?", en: "Let's talk?" }} />
-        <a class="underline hover:text-emerald-400" href={profile.linkedin}> linkedin</a>
-      </p>
-    </section>
-  </main>
+      <!-- U05 contato -->
+      <section data-panel="contato" hidden>
+        <p class="panel-cmd">$ contact --open</p>
+        <p class="mt-6 text-2xl font-bold sm:text-4xl"><T t={{ pt: "Vamos conversar?", en: "Let's talk?" }} /></p>
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <a class="card contact" href={profile.linkedin} target="_blank" rel="noopener">linkedin ↗</a>
+          <a class="card contact" href={profile.github} target="_blank" rel="noopener">github ↗</a>
+          <a class="card contact" href="/curriculo-thiago-mateus.pdf" download>
+            <T t={{ pt: "currículo ↓", en: "résumé ↓" }} />
+          </a>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+  <script>
+    const room = document.getElementById("room") as HTMLDialogElement;
+    const title = document.getElementById("room-title")!;
+    const panels = [...room.querySelectorAll<HTMLElement>("[data-panel]")];
+    const names: Record<string, string> = {
+      projetos: "U01 · projects/",
+      stack: "U02 · stack.txt",
+      trajetoria: "U03 · git log",
+      terminal: "U04 · ssh visitor@",
+      contato: "U05 · contact --open",
+    };
+    const ids = Object.keys(names);
+    let closing = false;
+
+    function show(id: string) {
+      panels.forEach((p) => (p.hidden = p.dataset.panel !== id));
+      title.textContent = names[id];
+      room.querySelector(".room-body")!.scrollTop = 0;
+      if (!room.open) room.showModal();
+      room.classList.remove("closing");
+      document.documentElement.classList.add("locked");
+      if (id === "terminal") document.getElementById("term-in")?.focus();
+    }
+
+    function hide() {
+      if (!room.open || closing) return;
+      closing = true;
+      room.classList.add("closing");
+      setTimeout(() => {
+        room.close();
+        room.classList.remove("closing");
+        document.documentElement.classList.remove("locked");
+        closing = false;
+      }, 180);
+    }
+
+    function open(id: string) {
+      if (!ids.includes(id)) return;
+      history.pushState({ m: id }, "", "#" + id);
+      show(id);
+    }
+
+    function close() {
+      if (history.state?.m) history.back();
+      else hide();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-open]").forEach((b) =>
+      b.addEventListener("click", () => open(b.dataset.open!)),
+    );
+    document.getElementById("room-close")!.addEventListener("click", close);
+    room.addEventListener("cancel", (e) => {
+      e.preventDefault();
+      close();
+    });
+    window.addEventListener("popstate", (e) => {
+      if (e.state?.m) show(e.state.m);
+      else hide();
+    });
+    window.addEventListener("keydown", (e) => {
+      const t = e.target as HTMLElement;
+      if (room.open || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (t.tagName === "INPUT" || t.tagName === "TEXTAREA") return;
+      const n = Number(e.key);
+      if (n >= 1 && n <= ids.length) open(ids[n - 1]);
+    });
+
+    const initial = location.hash.slice(1);
+    if (ids.includes(initial)) {
+      history.replaceState({ m: initial }, "", "#" + initial);
+      show(initial);
+    }
+  </script>
 </Layout>
