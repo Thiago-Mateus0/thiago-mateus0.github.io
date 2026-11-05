@@ -1,13 +1,15 @@
 ---
 import "../styles/global.css";
-const { title = "Thiago Mateus" } = Astro.props;
+const { title = "Thiago Mateus", description = "" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="pt">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090b10" />
+    {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -17,7 +19,9 @@ const { title = "Thiago Mateus" } = Astro.props;
       document.documentElement.lang = lang;
     </script>
   </head>
-  <body class="bg-zinc-950 font-mono text-zinc-200">
+  <body>
+    <a class="skip" href="#main"><span data-l="pt">Ir para o conteúdo</span><span data-l="en">Skip to content</span></a>
+    <div class="progress" id="progress" aria-hidden="true"></div>
     <slot />
     <script is:inline>
       document.querySelectorAll("[data-set-lang]").forEach((b) =>
@@ -27,10 +31,62 @@ const { title = "Thiago Mateus" } = Astro.props;
           localStorage.setItem("lang", l);
         }),
       );
+      // tilt + brilho que segue o mouse nos cards (só com mouse e sem reduce-motion)
+      if (matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+        document.querySelectorAll(".pcard").forEach((c) => {
+          c.addEventListener("pointermove", (e) => {
+            const r = c.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width;
+            const y = (e.clientY - r.top) / r.height;
+            c.style.setProperty("--ry", (x - 0.5) * 5 + "deg");
+            c.style.setProperty("--rx", (0.5 - y) * 5 + "deg");
+            c.style.setProperty("--mx", x * 100 + "%");
+            c.style.setProperty("--my", y * 100 + "%");
+          });
+          c.addEventListener("pointerleave", () => {
+            c.style.setProperty("--rx", "0deg");
+            c.style.setProperty("--ry", "0deg");
+          });
+        });
+      }
+      document.querySelectorAll("[data-more]").forEach((b) =>
+        b.addEventListener("click", () => {
+          const d = b.previousElementSibling;
+          const open = d.classList.toggle("clamp") === false;
+          b.setAttribute("aria-expanded", String(open));
+          b.querySelectorAll("[data-l]").forEach((s) => (s.hidden = s.dataset.state !== (open ? "less" : "more")));
+        }),
+      );
       document.querySelectorAll("[data-filter]").forEach((b) =>
         b.addEventListener("click", () => {
           const f = b.getAttribute("data-filter");
-          document.querySelectorAll("[data-filter]").forEach((x) =>
+          // tilt + brilho que segue o mouse nos cards (só com mouse e sem reduce-motion)
+      if (matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+        document.querySelectorAll(".pcard").forEach((c) => {
+          c.addEventListener("pointermove", (e) => {
+            const r = c.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width;
+            const y = (e.clientY - r.top) / r.height;
+            c.style.setProperty("--ry", (x - 0.5) * 5 + "deg");
+            c.style.setProperty("--rx", (0.5 - y) * 5 + "deg");
+            c.style.setProperty("--mx", x * 100 + "%");
+            c.style.setProperty("--my", y * 100 + "%");
+          });
+          c.addEventListener("pointerleave", () => {
+            c.style.setProperty("--rx", "0deg");
+            c.style.setProperty("--ry", "0deg");
+          });
+        });
+      }
+      document.querySelectorAll("[data-more]").forEach((b) =>
+        b.addEventListener("click", () => {
+          const d = b.previousElementSibling;
+          const open = d.classList.toggle("clamp") === false;
+          b.setAttribute("aria-expanded", String(open));
+          b.querySelectorAll("[data-l]").forEach((s) => (s.hidden = s.dataset.state !== (open ? "less" : "more")));
+        }),
+      );
+      document.querySelectorAll("[data-filter]").forEach((x) =>
             x.toggleAttribute("data-active", x === b),
           );
           document.querySelectorAll("[data-tags]").forEach((c) => {

@@ -5,6 +5,8 @@ export const profile = {
   location: "Maceió - AL",
   github: "https://github.com/Thiago-Mateus0",
   linkedin: "https://www.linkedin.com/in/thiago-mateus-tech/",
+  // preencha para exibir o botão de e-mail no contato
+  email: "" as string,
   role: {
     pt: "Desenvolvedor full-stack",
     en: "Full-stack developer",
@@ -22,6 +24,9 @@ export type Project = {
   stack: string[];
   tags: ("web" | "ai")[];
   link?: string;
+  // preencha para exibir os botões nos cards
+  demo?: string;
+  repo?: string;
   // módulo de IA destacado dentro do projeto
   ai?: { name: string; desc: L; stack: string[] };
 };
