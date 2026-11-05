@@ -31,24 +31,6 @@ const { title = "Thiago Mateus", description = "" } = Astro.props;
           localStorage.setItem("lang", l);
         }),
       );
-      // tilt + brilho que segue o mouse nos cards (só com mouse e sem reduce-motion)
-      if (matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
-        document.querySelectorAll(".pcard").forEach((c) => {
-          c.addEventListener("pointermove", (e) => {
-            const r = c.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width;
-            const y = (e.clientY - r.top) / r.height;
-            c.style.setProperty("--ry", (x - 0.5) * 5 + "deg");
-            c.style.setProperty("--rx", (0.5 - y) * 5 + "deg");
-            c.style.setProperty("--mx", x * 100 + "%");
-            c.style.setProperty("--my", y * 100 + "%");
-          });
-          c.addEventListener("pointerleave", () => {
-            c.style.setProperty("--rx", "0deg");
-            c.style.setProperty("--ry", "0deg");
-          });
-        });
-      }
       document.querySelectorAll("[data-more]").forEach((b) =>
         b.addEventListener("click", () => {
           const d = b.previousElementSibling;

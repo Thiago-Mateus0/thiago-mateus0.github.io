@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import T from "../components/T.astro";
 import Terminal from "../components/Terminal.astro";
 import NavLinks from "../components/NavLinks.astro";
+import { ArrowRight, ArrowUpRight, ChevronDown, Download } from "@lucide/astro";
 import { profile, projects, focus, timeline, learning } from "../data/content";
 
 const stack = [...new Set(projects.flatMap((p) => p.stack))];
@@ -79,7 +80,7 @@ const units: Unit[] = [
         <p class="hero-focus"><span class="mark"><T t={focus} /></span></p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projetos" data-open="projetos">
-            <T t={{ pt: "Ver projetos", en: "See projects" }} /> <span class="arrow" aria-hidden="true">→</span>
+            <T t={{ pt: "Ver projetos", en: "See projects" }} /> <ArrowRight class="arrow" size={18} aria-hidden="true" />
           </a>
           <a class="btn" href="#contato" data-open="contato">
             <T t={{ pt: "Falar comigo", en: "Get in touch" }} />
@@ -93,9 +94,8 @@ const units: Unit[] = [
           <span class={`led led-${m.led}`} aria-hidden="true"></span>
           <span class="u-name">{m.name}</span>
           <span class="u-status"><T t={m.status} /></span>
-          <span class="u-go"><kbd>{i + 1}</kbd> <T t={{ pt: "entrar", en: "enter" }} /> →</span>
-          <span class="u-vents" aria-hidden="true"></span>
-        </button>
+          <span class="u-go"><kbd>{i + 1}</kbd> <T t={{ pt: "entrar", en: "enter" }} /> <ArrowRight size={14} aria-hidden="true" /></span>
+                  </button>
       ))}
     </main>
 
@@ -131,7 +131,7 @@ const units: Unit[] = [
           <button data-filter="web" class="chip">web</button>
           <button data-filter="ai" class="chip">ai</button>
         </div>
-        <div class="mt-6 grid gap-4 lg:grid-cols-2" style="--i:3">
+        <div class="mt-8 grid gap-6 lg:grid-cols-2" style="--i:3">
           {projects.map((p) => (
             <article data-tags={p.tags.join(" ")} class="card pcard">
               <div class="flex items-center gap-2">
@@ -141,24 +141,26 @@ const units: Unit[] = [
               <div class="stack">{p.stack.map((s) => <span class="chip">{s}</span>)}</div>
               <p class="desc clamp"><T t={p.desc} /></p>
               <button type="button" class="more" data-more aria-expanded="false">
-                <span data-l="pt" data-state="more">ler mais ↓</span><span data-l="pt" data-state="less" hidden>mostrar menos ↑</span>
-                <span data-l="en" data-state="more">read more ↓</span><span data-l="en" data-state="less" hidden>show less ↑</span>
+                <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
+                <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
+                <ChevronDown class="chev" size={16} aria-hidden="true" />
               </button>
               {p.ai && (
                 <div class="ai-block">
                   <h3><T t={{ pt: "Módulo de IA", en: "AI module" }} />: {p.ai.name}</h3>
                   <p class="desc clamp mt-2"><T t={p.ai.desc} /></p>
                   <button type="button" class="more" data-more aria-expanded="false">
-                    <span data-l="pt" data-state="more">ler mais ↓</span><span data-l="pt" data-state="less" hidden>mostrar menos ↑</span>
-                    <span data-l="en" data-state="more">read more ↓</span><span data-l="en" data-state="less" hidden>show less ↑</span>
+                    <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
+                    <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
+                <ChevronDown class="chev" size={16} aria-hidden="true" />
                   </button>
                   <div class="stack mt-2">{p.ai.stack.map((s) => <span class="chip">{s}</span>)}</div>
                 </div>
               )}
               {(p.demo || p.repo) && (
                 <div class="links">
-                  {p.demo && <a class="btn btn-primary" href={p.demo} target="_blank" rel="noopener">demo ↗</a>}
-                  {p.repo && <a class="btn" href={p.repo} target="_blank" rel="noopener">GitHub ↗</a>}
+                  {p.demo && <a class="btn btn-primary" href={p.demo} target="_blank" rel="noopener">demo <ArrowUpRight size={16} aria-hidden="true" /></a>}
+                  {p.repo && <a class="btn" href={p.repo} target="_blank" rel="noopener">GitHub <ArrowUpRight size={16} aria-hidden="true" /></a>}
                 </div>
               )}
             </article>
@@ -173,22 +175,22 @@ const units: Unit[] = [
         <p class="hero-bio" style="--i:2"><T t={profile.bio} /></p>
         <p class="hero-focus" style="--i:2"><span class="mark"><T t={focus} /></span></p>
 
-        <p class="panel-cmd mt-10" style="--i:3">$ cat stack.txt</p>
+        <p class="panel-cmd mt-14" style="--i:3">$ cat stack.txt</p>
         <div class="stack mt-4" style="--i:3">
           {stack.map((s) => <span class="chip">{s}</span>)}
         </div>
-        <p class="panel-cmd mt-10" style="--i:4">$ echo $LEARNING</p>
+        <p class="panel-cmd mt-14" style="--i:4">$ echo $LEARNING</p>
         <div class="stack mt-4" style="--i:4">
           {learning.map((s) => <span class="chip chip-hot">{s}</span>)}
         </div>
 
-        <p class="panel-cmd mt-10" style="--i:5">$ git log --oneline</p>
+        <p class="panel-cmd mt-14" style="--i:5">$ git log --oneline</p>
         <ol class="log mt-6" style="--i:5">
           {timeline.map((i, idx) => (
             <li>
               <span class="dot" aria-hidden="true"></span>
               <p class="faint text-sm">
-                {idx === 0 && <span class="accent">HEAD → </span>}{i.period}
+                {idx === 0 && <span class="accent">HEAD · </span>}{i.period}
                 <span class="tag ml-2">{i.kind === "work" ? "work" : "edu"}</span>
               </p>
               <p class="mt-1 text-lg"><T t={i.title} /></p>
@@ -210,12 +212,12 @@ const units: Unit[] = [
         <h2 class="panel-title" style="--i:1"><T t={{ pt: "Vamos conversar?", en: "Let's talk?" }} /></h2>
         <div class="mt-8 grid gap-3 sm:grid-cols-2" style="--i:2">
           {profile.email && (
-            <a class="card contact" href={`mailto:${profile.email}`}>e-mail <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="card contact" href={`mailto:${profile.email}`}>e-mail <ArrowUpRight class="arrow" size={20} aria-hidden="true" /></a>
           )}
-          <a class="card contact" href={profile.linkedin} target="_blank" rel="noopener">linkedin <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="card contact" href={profile.github} target="_blank" rel="noopener">github <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="card contact" href={profile.linkedin} target="_blank" rel="noopener">linkedin <ArrowUpRight class="arrow" size={20} aria-hidden="true" /></a>
+          <a class="card contact" href={profile.github} target="_blank" rel="noopener">github <ArrowUpRight class="arrow" size={20} aria-hidden="true" /></a>
           <a class="card contact" href="/curriculo-thiago-mateus.pdf" download>
-            <span><T t={{ pt: "currículo", en: "résumé" }} /></span> <span class="arrow" aria-hidden="true">↓</span>
+            <span><T t={{ pt: "currículo", en: "résumé" }} /></span> <Download class="arrow" size={20} aria-hidden="true" />
           </a>
         </div>
       </section>
