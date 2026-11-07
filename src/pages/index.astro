@@ -12,11 +12,11 @@ const last = rest.join(" ");
 
 // seções = unidades do rack (mesma ordem)
 const sections = [
-  { id: "inicio", u: "U01", name: "boot.sh", pt: "Início", en: "Home" },
-  { id: "projetos", u: "U02", name: "projects/", pt: "Projetos", en: "Projects" },
-  { id: "sobre", u: "U03", name: "about.md", pt: "Sobre", en: "About" },
-  { id: "terminal", u: "U04", name: "ssh visitor@", pt: "Terminal", en: "Terminal" },
-  { id: "contato", u: "U05", name: "contact --open", pt: "Contato", en: "Contact" },
+  { id: "inicio", u: "AL1", name: "farol.sh", pt: "Início", en: "Home" },
+  { id: "projetos", u: "AL2", name: "obras/", pt: "Projetos", en: "Projects" },
+  { id: "sobre", u: "AL3", name: "eu.md", pt: "Sobre", en: "About" },
+  { id: "terminal", u: "AL4", name: "ssh visitante@", pt: "Terminal", en: "Terminal" },
+  { id: "contato", u: "AL5", name: "sinal --aberto", pt: "Contato", en: "Contact" },
 ];
 // matriz de pontos decorativa de cada unidade (determinística)
 const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed * 5) % 5) < 2);
@@ -25,9 +25,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
 <Layout title={`${profile.name} — ${profile.role.en}`} description={profile.bio.en}>
   <header class="hdr">
     <div class="hdr-in">
-      <a class="logo" href="#inicio" aria-label="thiago.dev">
-        <span class="logo-mark" aria-hidden="true">{Array.from({ length: 9 }, () => <i />)}</span>
-        thiago.dev
+      <a class="logo" href="#inicio" aria-label="Thiago Mateus">
+        <span class="logo-mark" aria-hidden="true">TM</span>
+        thiago<span class="g">/</span>mcz
       </a>
       <nav class="nav" aria-label="Principal">
         {sections.slice(1).map((s, i) => (
@@ -48,7 +48,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <div class="floor" aria-hidden="true"></div>
       <div class="glow" aria-hidden="true"></div>
       <div class="hud" aria-hidden="true">
-        <span>rack <b>sp-01</b></span>
+        <span>rack <b>mcz-01</b></span>
         <span>{profile.location}</span>
         <span>UTC−3 · <b id="clock">--:--</b></span>
       </div>
@@ -61,7 +61,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             <div class="face f-right"></div>
             <div class="face f-top"></div>
             <div class="post l"></div><div class="post r"></div>
-            <div class="cap t">SP-01</div><div class="cap b">THIAGO.DEV</div>
+            <div class="cap t">MCZ-01</div><div class="cap b">THIAGO MATEUS</div>
 
             <div id="units">
               {sections.map((s, i) => (
@@ -95,7 +95,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             </div>
 
             <div class="door" id="door" aria-hidden="true">
-              <div class="door-lcd"><i></i>SP-01 · ONLINE</div>
+              <div class="door-lcd"><i></i>MCZ-01 · NO AR</div>
               <div class="door-handle"></div>
               <div class="door-hint">▼ scroll</div>
             </div>
@@ -111,9 +111,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U01 -->
       <section class="hero" id="inicio">
         <div class="boot" aria-hidden="true">
-          <span style="animation-delay:0.1s">&gt; boot rack sp-01 ........ <b>ok</b></span>
-          <span style="animation-delay:0.6s">&gt; mount /projects ........ <b>ok</b></span>
-          <span style="animation-delay:1.1s">&gt; status: <b>online</b> · {profile.location}</span>
+          <span style="animation-delay:0.1s">&gt; acendendo o farol ........ <b>ok</b></span>
+          <span style="animation-delay:0.6s">&gt; montando /obras ........ <b>ok</b></span>
+          <span style="animation-delay:1.1s">&gt; maré: <b>alta</b> · {profile.location}</span>
         </div>
 
         <h1 class="name" aria-label={profile.name}>
@@ -126,15 +126,27 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
           </span>
         </h1>
 
-        <div class="lead fade" style="animation-delay:1.3s">
-          <p class="lead-t"><T t={profile.bio} /></p>
-          <p class="lead-s mono"><span class="g"><T t={profile.role} /></span> · <T t={focus} /></p>
+        <div class="hero-row fade" style="animation-delay:1.3s">
+          <div class="lead">
+            <p class="lead-t"><T t={profile.bio} /></p>
+            <p class="lead-s mono"><span class="g"><T t={profile.role} /></span> · <T t={focus} /></p>
+          </div>
+          <figure class="badge-id">
+            <div class="badge-ph">
+              <img src="/thiago.jpg" alt="Thiago Mateus" width="240" height="360" fetchpriority="high" />
+              <i class="scan" aria-hidden="true"></i>
+            </div>
+            <figcaption class="mono">
+              <span><b>TM-001</b> · <T t={{ pt: "OPERADOR", en: "OPERATOR" }} /></span>
+              <span><i class="live"></i> MCZ · <b id="clock2">--:--</b></span>
+            </figcaption>
+          </figure>
         </div>
 
         <div class="ctas fade" style="animation-delay:1.5s">
-          <a class="btn" href="#projetos"><T t={{ pt: "VER PROJETOS", en: "SEE PROJECTS" }} /> <ArrowRight size={18} aria-hidden="true" /></a>
-          <a class="ghost big" href="/curriculo-thiago-mateus.pdf" download><Download size={16} aria-hidden="true" /> <T t={{ pt: "baixar currículo", en: "download résumé" }} /></a>
-          <a class="ghost big" href="#contato"><T t={{ pt: "falar comigo", en: "get in touch" }} /></a>
+          <a class="btn" href="#projetos"><T t={{ pt: "VER AS OBRAS", en: "SEE THE WORK" }} /> <ArrowRight size={18} aria-hidden="true" /></a>
+          <a class="ghost big" href="/curriculo-thiago-mateus.pdf" download><Download size={16} aria-hidden="true" /> <T t={{ pt: "meu currículo", en: "my résumé" }} /></a>
+          <a class="ghost big" href="#contato"><T t={{ pt: "mandar sinal", en: "send a signal" }} /></a>
         </div>
 
         <p class="meta fade" style="animation-delay:1.7s">
@@ -147,9 +159,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U02 projetos -->
       <section class="sec" id="projetos">
         <div class="blade hot">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>U02 · PROJECTS/</span><span class="st">● {projects.length} <T t={{ pt: "PROJETOS", en: "PROJECTS" }} /></span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL2 · OBRAS/</span><span class="st">● {projects.length} <T t={{ pt: "PROJETOS", en: "PROJECTS" }} /></span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "Coisas que eu construí", en: "Things I built" }} /></h2>
+            <h2 class="h2"><T t={{ pt: "O que já botei no ar", en: "What I've shipped" }} /></h2>
             <div class="filters">
               <button data-filter="all" data-active class="chip"><T t={{ pt: "todos", en: "all" }} /></button>
               <button data-filter="web" class="chip">web</button>
@@ -198,15 +210,10 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U03 sobre -->
       <section class="sec" id="sobre">
         <div class="blade">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>U03 · ABOUT.MD</span><span class="st">● HEAD</span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL3 · EU.MD</span><span class="st">● HEAD</span></div>
           <div class="bb">
-            <div class="about-top">
-              <img class="about-photo" src="/thiago.jpg" alt="Thiago Mateus" width="320" height="480" loading="lazy" />
-              <div class="about-text">
-            <h2 class="h2"><T t={{ pt: "Construo de ponta a ponta.", en: "I build end to end." }} /> <em><T t={{ pt: "Agora, com IA.", en: "Now, with AI." }} /></em></h2>
+            <h2 class="h2"><T t={{ pt: "Do banco de dados ao botão.", en: "From database to button." }} /> <em><T t={{ pt: "Agora com IA no meio.", en: "Now with AI in the loop." }} /></em></h2>
             <p class="p"><T t={profile.bio} /></p>
-              </div>
-            </div>
 
             <div class="stats">
               <div><b>{projects.length}</b><span><T t={{ pt: "projetos", en: "projects" }} /></span></div>
@@ -251,9 +258,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U04 terminal -->
       <section class="sec" id="terminal">
         <div class="blade">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>U04 · SSH VISITOR@PORTFOLIO</span><span class="st">● <T t={{ pt: "INTERATIVO", en: "INTERACTIVE" }} /></span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL4 · SSH VISITANTE@MCZ</span><span class="st">● <T t={{ pt: "INTERATIVO", en: "INTERACTIVE" }} /></span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "Pergunte ao rack.", en: "Ask the rack." }} /></h2>
+            <h2 class="h2"><T t={{ pt: "Manda um comando.", en: "Send a command." }} /></h2>
             <Terminal />
           </div>
         </div>
@@ -262,10 +269,13 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U05 contato -->
       <section class="sec" id="contato">
         <div class="blade hot">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>U05 · CONTACT --OPEN</span><span class="st">● <T t={{ pt: "DISPONÍVEL", en: "OPEN TO TALK" }} /></span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL5 · SINAL --ABERTO</span><span class="st">● <T t={{ pt: "NO AR", en: "ON AIR" }} /></span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "Vamos conversar?", en: "Let's talk?" }} /></h2>
-            <p class="p"><T t={{ pt: "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre IA e desenvolvimento web? Me chama.", en: "Got a role, a project, or just want to chat about AI and web development? Reach out." }} /></p>
+            <h2 class="h2"><T t={{ pt: "Bora trocar uma ideia?", en: "Shall we talk shop?" }} /></h2>
+            <p class="p"><T t={{ pt: "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre IA e desenvolvimento web? Manda o sinal que eu respondo.", en: "Got a role, a project, or just want to chat about AI and web development? Send a signal and I'll answer." }} /></p>
+            <figure class="sig" id="sig">
+              <img src="/assinatura.png" alt={`Assinatura de ${profile.name}`} width="900" height="454" loading="lazy" />
+            </figure>
             {profile.email && (
               <div class="mail"><span>$</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
             )}
@@ -275,7 +285,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             </div>
             <div class="cvs">
               <a class="cv primary" href="/curriculo-thiago-mateus.pdf" download>
-                <span><b><T t={{ pt: "BAIXAR CURRÍCULO", en: "DOWNLOAD RÉSUMÉ" }} /></b><small>PDF</small></span>
+                <span><b><T t={{ pt: "LEVAR O CURRÍCULO", en: "TAKE THE RÉSUMÉ" }} /></b><small>PDF</small></span>
                 <Download size={20} aria-hidden="true" />
               </a>
             </div>
@@ -283,7 +293,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
         </div>
         <footer class="foot">
           <span>© 2026 {profile.name}</span>
-          <span>rack sp-01 · u05 · thiago.dev</span>
+          <span>rack mcz-01 · al5 · feito em Maceió</span>
         </footer>
       </section>
     </main>
@@ -350,10 +360,24 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       if (n >= 1 && n <= ids.length) secs[n - 1].scrollIntoView({ behavior: calm ? "auto" : "smooth" });
     });
 
+    // assinatura: as matrizes de LED acendem conforme o cursor cruza o palco
+    const stage = document.querySelector(".stage");
+    const dms = [...document.querySelectorAll(".dm")];
+    if (!calm) stage.addEventListener("pointermove", (e) => {
+      const b = stage.getBoundingClientRect();
+      const n = Math.round(((e.clientX - b.left) / b.width) * 21);
+      dms.forEach((d) => [...d.children].forEach((c, i) => c.classList.toggle("hot", i < n)));
+    }, { passive: true });
+
+    // assinatura: desenha o traço ao entrar na tela
+    const sig = document.getElementById("sig");
+    if (calm) sig.classList.add("in");
+    else new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { sig.classList.add("in"); o.disconnect(); } }), { threshold: 0.6 }).observe(sig);
+
     // relógio de Maceió
-    const clock = document.getElementById("clock");
+    const clock = document.getElementById("clock"), clock2 = document.getElementById("clock2");
     const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Maceio" });
-    const tick = () => (clock.textContent = fmt.format(new Date()));
+    const tick = () => (clock.textContent = clock2.textContent = fmt.format(new Date()));
     tick();
     setInterval(tick, 15000);
   </script>
