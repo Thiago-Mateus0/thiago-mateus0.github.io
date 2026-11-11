@@ -4,7 +4,7 @@ export const profile = {
   name: "Thiago Mateus",
   location: "Maceió - AL",
   github: "https://github.com/Thiago-Mateus0",
-  linkedin: "https://www.linkedin.com/in/thiago-mateus-tech/",
+  linkedin: "https://www.linkedin.com/in/thiago-mateus-91180a3a8",
   // preencha para exibir o botão de e-mail no contato
   email: "" as string,
   role: {
