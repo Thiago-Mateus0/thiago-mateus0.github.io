@@ -39,8 +39,9 @@ export const projects: Project[] = [
       pt: "Sistema de gestão em modo quiosque (tablet) para um estúdio fotográfico de Maceió, em uso real. Substitui quadros e comandas de papel com 8 módulos: Comanda, Checklist, Estoque, Escala, Horas extras, Avisos, Achados e Treinamento. Integra com o Altegio por webhook, com log de auditoria append-only garantido no banco e autenticação por PIN por aparelho.",
       en: "Kiosk-mode (tablet) management system for a photo studio in Maceió, in real use. Replaces paper boards and tabs with 8 modules: Orders, Checklist, Inventory, Schedule, Overtime, Notices, Lost & Found and Training. Integrates with Altegio via webhook, with an append-only audit log enforced at the database level and per-device PIN authentication.",
     },
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "PL/pgSQL", "Claude API"],
+    stack: ["React", "Vite", "TypeScript", "Node.js", "PostgreSQL", "PL/pgSQL", "Claude API"],
     tags: ["web", "ai"],
+    repo: "https://github.com/Thiago-Mateus0/lifetrailer-studio",
     ai: {
       name: "Merida",
       desc: {
@@ -54,18 +55,28 @@ export const projects: Project[] = [
     slug: "arkhe-finance",
     name: "Arkhé Finance",
     desc: {
-      pt: "Aplicação de finanças pessoais que evoluiu de CLI em Python para uma API REST. Obtém transações via Open Finance (Pluggy), categoriza e permite lançamentos manuais, e importa extratos em CSV. Frontend no GitHub Pages e API no Render.",
-      en: "Personal finance app that evolved from a Python CLI into a REST API. Fetches transactions via Open Finance (Pluggy), categorizes them, supports manual entries, and imports CSV statements. Frontend on GitHub Pages and API on Render.",
+      pt: "App de finanças pessoais que importa o CSV de conta e de fatura do Nubank, separa o que é gasto do que é só dinheiro passando pela conta (pagamento de fatura, Pix entre contas próprias, repasses), categoriza por regras e mostra orçamento, parcelas a vir e assinaturas no celular. Roda local, com SQLite e dinheiro em centavos inteiros, e a importação é idempotente. Tem 25 decisões de arquitetura (ADRs), testes automatizados e CI, e usa dados 100% fictícios na demonstração. A sincronização automática pelo Meu Pluggy é opcional.",
+      en: "Personal finance app that imports Nubank account and card CSVs, separates real spending from money merely passing through the account (card bill payments, Pix between own accounts, pass-throughs), categorizes by rules, and shows budgets, upcoming installments and subscriptions on mobile. Runs locally on SQLite with integer-cent money, and imports are idempotent. It has 25 architecture decision records, automated tests and CI, and its demo uses 100% fictional data. Automatic sync through Meu Pluggy is optional.",
     },
-    stack: ["Python", "FastAPI", "SQLite", "Pluggy (Open Finance)", "Render", "GitHub Pages"],
+    stack: ["Python", "FastAPI", "SQLite", "React", "TypeScript", "Tailwind", "pytest"],
     tags: ["web"],
+  },
+  {
+    slug: "extrator-enem",
+    name: "Extrator ENEM",
+    desc: {
+      pt: "Lê a prova e o gabarito oficiais do ENEM em PDF e entrega cada questão em JSON: enunciado, alternativas, figuras, tabelas, fórmulas e a resposta certa. Foi feito para a plataforma de estudos que desenvolvo com um sócio. O que o programa não tem certeza de ter lido direito vira alerta para conferência, em vez de passar batido. A leitura é geométrica, sem IA e sem rede, e roda dentro de um sandbox (bubblewrap ou Docker) que recusa executar se o isolamento falhar. Extraiu as 90 questões do 2º dia de 2024 e de 2025, com testes e CI.",
+      en: "Reads the official ENEM exam and answer-key PDFs and outputs each question as JSON: stem, choices, figures, tables, formulas and the correct answer. Built for the study platform I'm developing with a partner. Anything it isn't sure it read correctly becomes a warning for review instead of slipping through. Reading is geometric, with no AI and no network, and runs inside a sandbox (bubblewrap or Docker) that refuses to run if isolation fails. It extracted all 90 questions of day 2 from the 2024 and 2025 exams, with tests and CI.",
+    },
+    stack: ["Python", "PyMuPDF", "pytest", "Docker", "bubblewrap", "GitHub Actions"],
+    tags: [],
   },
   {
     slug: "study-track",
     name: "Study Track",
     desc: {
-      pt: "CLI em Python para acompanhar estudos. Cada sessão registra matéria, tempo e data, e o programa calcula os totais mensais. Os dados ficam em JSON. Foi meu primeiro projeto no GitHub.",
-      en: "Python CLI to track studying. Each session records subject, time and date, and the program computes monthly totals. Data is stored in JSON. It was my first project on GitHub.",
+      pt: "CLI em Python para acompanhar estudos. Cada sessão registra o tópico e o tempo, o programa mostra o total estudado e controla uma meta diária. Os dados ficam em JSON. Foi meu primeiro projeto no GitHub.",
+      en: "Python CLI to track studying. Each session records the topic and time, and the program shows the total studied and tracks a daily goal. Data is stored in JSON. It was my first project on GitHub.",
     },
     stack: ["Python", "JSON"],
     tags: ["web"],
