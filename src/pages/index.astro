@@ -145,7 +145,8 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
 
         <div class="ctas fade" style="animation-delay:1.5s">
           <a class="btn" href="#projetos"><T t={{ pt: "VER AS OBRAS", en: "SEE THE WORK" }} /> <ArrowRight size={18} aria-hidden="true" /></a>
-          <a class="ghost big" href="/curriculo-thiago-mateus.pdf" download><Download size={16} aria-hidden="true" /> <T t={{ pt: "meu currículo", en: "my résumé" }} /></a>
+          <a class="ghost big" data-l="pt" href="/curriculo-thiago-mateus.pdf" download><Download size={16} aria-hidden="true" /> meu currículo</a>
+          <a class="ghost big" data-l="en" href="/curriculo-thiago-mateus-en.pdf" download><Download size={16} aria-hidden="true" /> my résumé</a>
           <a class="ghost big" href="#contato"><T t={{ pt: "mandar sinal", en: "send a signal" }} /></a>
         </div>
 
@@ -284,8 +285,12 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
               <a class="ghost big" href={profile.github} target="_blank" rel="noopener">github <ArrowUpRight size={16} aria-hidden="true" /></a>
             </div>
             <div class="cvs">
-              <a class="cv primary" href="/curriculo-thiago-mateus.pdf" download>
-                <span><b><T t={{ pt: "LEVAR O CURRÍCULO", en: "TAKE THE RÉSUMÉ" }} /></b><small>PDF</small></span>
+              <a class="cv primary" data-l="pt" href="/curriculo-thiago-mateus.pdf" download>
+                <span><b>LEVAR O CURRÍCULO</b><small>PDF · PT</small></span>
+                <Download size={20} aria-hidden="true" />
+              </a>
+              <a class="cv primary" data-l="en" href="/curriculo-thiago-mateus-en.pdf" download>
+                <span><b>TAKE THE RÉSUMÉ</b><small>PDF · EN</small></span>
                 <Download size={20} aria-hidden="true" />
               </a>
             </div>
