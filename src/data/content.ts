@@ -27,6 +27,8 @@ export type Project = {
   // preencha para exibir os botões nos cards
   demo?: string;
   repo?: string;
+  // screenshot do card (1600×1000, 16:10) em public/projetos/<slug>.png; sem isso o card não mostra imagem
+  image?: string;
   // módulo de IA destacado dentro do projeto
   ai?: { name: string; desc: L; stack: string[] };
 };
@@ -34,6 +36,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "lifetrailer",
+    image: "/projetos/lifetrailer.png",
     name: "LifeTrailer",
     desc: {
       pt: "Sistema de gestão em modo quiosque (tablet) para um estúdio fotográfico de Maceió, em uso real. Substitui quadros e comandas de papel com 8 módulos: Comanda, Checklist, Estoque, Escala, Horas extras, Avisos, Achados e Treinamento. Integra com o Altegio por webhook, com log de auditoria append-only garantido no banco e autenticação por PIN por aparelho.",
@@ -53,6 +56,7 @@ export const projects: Project[] = [
   },
   {
     slug: "arkhe-finance",
+    image: "/projetos/arkhe-finance.png",
     name: "Arkhé Finance",
     desc: {
       pt: "App de finanças pessoais que importa o CSV de conta e de fatura do Nubank, separa o que é gasto do que é só dinheiro passando pela conta (pagamento de fatura, Pix entre contas próprias, repasses), categoriza por regras e mostra orçamento, parcelas a vir e assinaturas no celular. Roda local, com SQLite e dinheiro em centavos inteiros, e a importação é idempotente. Tem 25 decisões de arquitetura (ADRs), testes automatizados e CI, e usa dados 100% fictícios na demonstração. A sincronização automática pelo Meu Pluggy é opcional.",
@@ -73,6 +77,7 @@ export const projects: Project[] = [
   },
   {
     slug: "study-track",
+    image: "/projetos/study-track.png",
     name: "Study Track",
     desc: {
       pt: "CLI em Python para acompanhar estudos. Cada sessão registra o tópico e o tempo, o programa mostra o total estudado e controla uma meta diária. Os dados ficam em JSON. Foi meu primeiro projeto no GitHub.",

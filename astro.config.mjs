@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://thiago-mateus0.github.io',
   vite: {
     // tipos de duas versões do vite divergem (astro x tailwind); em runtime funciona
     // @ts-expect-error

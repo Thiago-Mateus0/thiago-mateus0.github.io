@@ -22,7 +22,10 @@ const sections = [
 const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed * 5) % 5) < 2);
 ---
 
-<Layout title={`${profile.name} — ${profile.role.en}`} description={profile.bio.en}>
+<Layout
+  title={{ pt: `${profile.name} — ${profile.role.pt}`, en: `${profile.name} — ${profile.role.en}` }}
+  description={profile.bio}
+>
   <header class="hdr">
     <div class="hdr-in">
       <a class="logo" href="#inicio" aria-label="Thiago Mateus">
@@ -171,6 +174,12 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             <div class="projs">
               {projects.map((p, idx) => (
                 <article data-tags={p.tags.join(" ")} class="proj">
+                  {p.image && (
+                    <figure class="shot">
+                      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>{p.slug}</span></div>
+                      <img src={p.image} alt={`Screenshot — ${p.name}`} width="1600" height="1000" loading="lazy" decoding="async" />
+                    </figure>
+                  )}
                   <div class="proj-h">
                     <span class="proj-n">0{idx + 1}</span>
                     <h3>{p.name}</h3>
@@ -275,7 +284,19 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             <h2 class="h2"><T t={{ pt: "Bora trocar uma ideia?", en: "Shall we talk shop?" }} /></h2>
             <p class="p"><T t={{ pt: "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre IA e desenvolvimento web? Manda o sinal que eu respondo.", en: "Got a role, a project, or just want to chat about AI and web development? Send a signal and I'll answer." }} /></p>
             <figure class="sig" id="sig">
-              <img src="/assinatura.png" alt={`Assinatura de ${profile.name}`} width="900" height="454" loading="lazy" />
+              <svg viewBox="131 133 1280 581" role="img" aria-label={`Assinatura de ${profile.name}`}>
+                <defs>
+                  <mask id="sigmask" maskUnits="userSpaceOnUse" x="131" y="133" width="1280" height="581">
+                    <g fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round">
+                      <path pathLength="1" style="--d:0s;--t:1.3s" d="M505 710 L560 610 L680 360 C735 260 800 150 862 142 C885 165 850 235 705 300 C600 345 470 385 392 372 C368 352 385 318 455 296 C560 270 650 272 705 300" />
+                      <path pathLength="1" style="--d:1.2s;--t:1.7s" d="M1220 205 C900 300 500 420 300 520 C200 570 140 610 140 640 C160 655 400 635 900 595 C1150 575 1330 525 1395 475 C1415 440 1370 425 1300 430 C1150 440 1000 490 900 525" />
+                      <path pathLength="1" style="--d:2.8s;--t:0.9s" d="M610 595 L905 348 L775 578 L930 437 C935 480 905 500 895 520" />
+                    </g>
+                    <circle class="dot" cx="993" cy="372" r="30" fill="#fff" />
+                  </mask>
+                </defs>
+                <image href="/assinatura.png" x="131" y="133" width="1280" height="581" mask="url(#sigmask)" />
+              </svg>
             </figure>
             {profile.email && (
               <div class="mail"><span>$</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>

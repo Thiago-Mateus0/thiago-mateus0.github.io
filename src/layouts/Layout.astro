@@ -1,6 +1,15 @@
 ---
 import "../styles/global.css";
-const { title = "Thiago Mateus", description = "" } = Astro.props;
+type L = { pt: string; en: string };
+const { title = "Thiago Mateus", description = "" } = Astro.props as { title?: L | string; description?: L | string };
+const pick = (v: L | string, l: "pt" | "en") => (typeof v === "string" ? v : v[l]);
+// pt é o idioma padrão do HTML estático (o que crawlers e prévias de link leem);
+// o script inline troca título/descrição/og quando o visitante muda de idioma.
+const t = { pt: pick(title, "pt"), en: pick(title, "en") };
+const d = { pt: pick(description, "pt"), en: pick(description, "en") };
+// og:image precisa de URL absoluta: defina `site` em astro.config.mjs
+const ogImage = Astro.site ? new URL("/og.png", Astro.site).href : "/og.png";
+const canonical = Astro.site?.href;
 ---
 
 <!doctype html>
@@ -9,14 +18,45 @@ const { title = "Thiago Mateus", description = "" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0a09" />
-    {description && <meta name="description" content={description} />}
+    {d.pt && <meta name="description" content={d.pt} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Thiago Mateus" />
+    <meta property="og:title" content={t.pt} />
+    <meta property="og:description" content={d.pt} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Thiago Mateus — rack MCZ-01" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.pt} />
+    <meta name="twitter:description" content={d.pt} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{t.pt}</title>
+    <script id="seo" type="application/json" set:html={JSON.stringify({ t, d })} />
     <script is:inline>
       const saved = localStorage.getItem("lang");
       const lang = saved || (navigator.language.startsWith("pt") ? "pt" : "en");
       document.documentElement.lang = lang;
+      const meta = JSON.parse(document.getElementById("seo").textContent);
+      const applySeo = (l) => {
+        document.title = meta.t[l];
+        const set = (q, v) => document.querySelector(q)?.setAttribute("content", v);
+        set('meta[name="description"]', meta.d[l]);
+        set('meta[property="og:title"]', meta.t[l]);
+        set('meta[property="og:description"]', meta.d[l]);
+        set('meta[name="twitter:title"]', meta.t[l]);
+        set('meta[name="twitter:description"]', meta.d[l]);
+        set('meta[property="og:locale"]', l === "pt" ? "pt_BR" : "en_US");
+        set('meta[property="og:locale:alternate"]', l === "pt" ? "en_US" : "pt_BR");
+      };
+      applySeo(lang);
+      new MutationObserver(() => applySeo(document.documentElement.lang)).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     </script>
   </head>
   <body>

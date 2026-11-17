@@ -24,7 +24,7 @@ const data = {
     <label for="term-in" class="accent">$</label>
     <input
       id="term-in"
-      class="flex-1 bg-transparent outline-none placeholder:text-[var(--faint)]"
+      class="flex-1 bg-transparent outline-none placeholder:text-[var(--f3)]"
       placeholder="help"
       spellcheck="false"
     />
@@ -41,7 +41,7 @@ const data = {
   const lang = () => (document.documentElement.lang === "en" ? "en" : "pt") as "pt" | "en";
   const t = (o: { pt: string; en: string }) => o[lang()];
 
-  const print = (text: string, cls = "text-[var(--text)]") => {
+  const print = (text: string, cls = "text-[var(--fg)]") => {
     const p = document.createElement("p");
     p.className = cls;
     p.textContent = text;
