@@ -177,7 +177,10 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
                   {p.image && (
                     <figure class="shot">
                       <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>{p.slug}</span></div>
-                      <img src={p.image} alt={`Screenshot — ${p.name}`} width="1600" height="1000" loading="lazy" decoding="async" />
+                      <button type="button" class="shot-zoom" data-zoom={p.image} data-alt={p.name} aria-label={`Ampliar / enlarge: ${p.name}`}>
+                        <img src={p.image} alt={`Screenshot — ${p.name}`} width="1600" height="1000" loading="lazy" decoding="async" />
+                        <span class="shot-hint" aria-hidden="true">⤢ zoom</span>
+                      </button>
                     </figure>
                   )}
                   <div class="proj-h">
@@ -324,6 +327,20 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       </section>
     </main>
   </div>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Screenshot">
+    <img id="lightbox-img" alt="" />
+  </dialog>
+
+  <script is:inline>
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lightbox-img");
+    document.addEventListener("click", (e) => {
+      const z = e.target.closest("[data-zoom]");
+      if (z) { lbImg.src = z.dataset.zoom; lbImg.alt = z.dataset.alt || ""; lb.showModal(); }
+      else if (e.target === lb || e.target === lbImg) lb.close();
+    });
+  </script>
 
   <script is:inline>
     const ids = ["inicio", "projetos", "sobre", "terminal", "contato"];
