@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import T from "../components/T.astro";
 import Terminal from "../components/Terminal.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 import { ArrowRight, ArrowUpRight, ChevronDown, Download } from "@lucide/astro";
 import { profile, projects, focus, timeline, learning } from "../data/content";
 
+const featured = projects.filter((p) => p.featured);
 const stack = [...new Set(projects.flatMap((p) => p.stack))];
 const aiCount = projects.filter((p) => p.tags.includes("ai")).length;
 const [first, ...rest] = profile.name.split(" ");
@@ -172,50 +174,11 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
               <button data-filter="ai" class="chip">ai</button>
             </div>
             <div class="projs">
-              {projects.map((p, idx) => (
-                <article data-tags={p.tags.join(" ")} class="proj">
-                  {p.image && (
-                    <figure class="shot">
-                      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>{p.slug}</span></div>
-                      <button type="button" class="shot-zoom" data-zoom={p.image} data-alt={p.name} aria-label={`Ampliar / enlarge: ${p.name}`}>
-                        <img src={p.image} alt={`Screenshot — ${p.name}`} width="1600" height="1000" loading="lazy" decoding="async" />
-                        <span class="shot-hint" aria-hidden="true">⤢ zoom</span>
-                      </button>
-                    </figure>
-                  )}
-                  <div class="proj-h">
-                    <span class="proj-n">0{idx + 1}</span>
-                    <h3>{p.name}</h3>
-                    {p.tags.includes("ai") && <span class="badge">AI</span>}
-                  </div>
-                  <div class="stack">{p.stack.map((s) => <span class="chip">{s}</span>)}</div>
-                  <p class="desc clamp"><T t={p.desc} /></p>
-                  <button type="button" class="more" data-more aria-expanded="false">
-                    <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
-                    <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
-                    <ChevronDown class="chev" size={16} aria-hidden="true" />
-                  </button>
-                  {p.ai && (
-                    <div class="ai-block">
-                      <h4><T t={{ pt: "MÓDULO DE IA", en: "AI MODULE" }} />: {p.ai.name}</h4>
-                      <p class="desc clamp" style="margin-top:10px"><T t={p.ai.desc} /></p>
-                      <button type="button" class="more" data-more aria-expanded="false">
-                        <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
-                        <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
-                        <ChevronDown class="chev" size={16} aria-hidden="true" />
-                      </button>
-                      <div class="stack">{p.ai.stack.map((s) => <span class="chip">{s}</span>)}</div>
-                    </div>
-                  )}
-                  {(p.demo || p.repo) && (
-                    <div class="links">
-                      {p.demo && <a class="ghost" href={p.demo} target="_blank" rel="noopener">demo <ArrowUpRight size={14} aria-hidden="true" /></a>}
-                      {p.repo && <a class="ghost" href={p.repo} target="_blank" rel="noopener">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>}
-                    </div>
-                  )}
-                </article>
-              ))}
+              {featured.map((p) => <ProjectCard p={p} n={projects.indexOf(p) + 1} />)}
             </div>
+            <button type="button" class="btn-all" data-all-open>
+              <T t={{ pt: `VER TODOS OS ${projects.length} PROJETOS`, en: `SEE ALL ${projects.length} PROJECTS` }} /> <ArrowRight size={18} aria-hidden="true" />
+            </button>
           </div>
         </div>
       </section>
@@ -328,11 +291,26 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
     </main>
   </div>
 
+  <dialog id="all-projects" class="all-dlg" aria-label="Projetos / Projects">
+    <div class="all-h">
+      <span><T t={{ pt: "TODOS OS PROJETOS", en: "ALL PROJECTS" }} /> · {projects.length}</span>
+      <button type="button" class="more" data-all-close aria-label="Fechar / close">✕ <T t={{ pt: "fechar", en: "close" }} /></button>
+    </div>
+    <div class="all-grid">
+      {projects.map((p, i) => <ProjectCard p={p} n={i + 1} compact />)}
+    </div>
+  </dialog>
+
   <dialog id="lightbox" class="lightbox" aria-label="Screenshot">
     <img id="lightbox-img" alt="" />
   </dialog>
 
   <script is:inline>
+    const allDlg = document.getElementById("all-projects");
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-all-open]")) allDlg.showModal();
+      else if (e.target.closest("[data-all-close]") || e.target === allDlg) allDlg.close();
+    });
     const lb = document.getElementById("lightbox");
     const lbImg = document.getElementById("lightbox-img");
     document.addEventListener("click", (e) => {

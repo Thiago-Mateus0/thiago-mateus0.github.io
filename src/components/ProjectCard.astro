@@ -1,0 +1,48 @@
+---
+import T from "./T.astro";
+import { ArrowUpRight, ChevronDown } from "@lucide/astro";
+import type { Project } from "../data/content";
+interface Props { p: Project; n: number; compact?: boolean }
+const { p, n, compact = false } = Astro.props;
+---
+<article data-tags={p.tags.join(" ")} class:list={["proj", { "proj-compact": compact }]}>
+  {p.image && (
+    <figure class="shot">
+      <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>{p.slug}</span></div>
+      <button type="button" class="shot-zoom" data-zoom={p.image} data-alt={p.name} aria-label={`Ampliar / enlarge: ${p.name}`}>
+        <img src={p.image} alt={`Screenshot — ${p.name}`} width="1600" height="1000" loading="lazy" decoding="async" />
+        <span class="shot-hint" aria-hidden="true">⤢ zoom</span>
+      </button>
+    </figure>
+  )}
+  <div class="proj-h">
+    <span class="proj-n">{String(n).padStart(2, "0")}</span>
+    <h3>{p.name}</h3>
+    {p.tags.includes("ai") && <span class="badge">AI</span>}
+  </div>
+  <div class="stack">{p.stack.map((s) => <span class="chip">{s}</span>)}</div>
+  <p class="desc clamp"><T t={p.desc} /></p>
+  <button type="button" class="more" data-more aria-expanded="false">
+    <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
+    <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
+    <ChevronDown class="chev" size={16} aria-hidden="true" />
+  </button>
+  {p.ai && (
+    <div class="ai-block">
+      <h4><T t={{ pt: "MÓDULO DE IA", en: "AI MODULE" }} />: {p.ai.name}</h4>
+      <p class="desc clamp" style="margin-top:10px"><T t={p.ai.desc} /></p>
+      <button type="button" class="more" data-more aria-expanded="false">
+        <span data-l="pt" data-state="more">ler mais</span><span data-l="pt" data-state="less" hidden>mostrar menos</span>
+        <span data-l="en" data-state="more">read more</span><span data-l="en" data-state="less" hidden>show less</span>
+        <ChevronDown class="chev" size={16} aria-hidden="true" />
+      </button>
+      <div class="stack">{p.ai.stack.map((s) => <span class="chip">{s}</span>)}</div>
+    </div>
+  )}
+  {(p.demo || p.repo) && (
+    <div class="links">
+      {p.demo && <a class="ghost" href={p.demo} target="_blank" rel="noopener">demo <ArrowUpRight size={14} aria-hidden="true" /></a>}
+      {p.repo && <a class="ghost" href={p.repo} target="_blank" rel="noopener">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>}
+    </div>
+  )}
+</article>

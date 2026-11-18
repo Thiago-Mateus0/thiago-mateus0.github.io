@@ -29,6 +29,8 @@ export type Project = {
   repo?: string;
   // screenshot do card (1600×1000, 16:10) em public/projetos/<slug>.png; sem isso o card não mostra imagem
   image?: string;
+  // aparece na página; os demais ficam só na tela "ver todos"
+  featured?: boolean;
   // módulo de IA destacado dentro do projeto
   ai?: { name: string; desc: L; stack: string[] };
 };
@@ -36,6 +38,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "lifetrailer",
+    featured: true,
     image: "/projetos/lifetrailer.png",
     name: "LifeTrailer",
     desc: {
@@ -55,7 +58,29 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "bot-vagas",
+    featured: true,
+    image: "/projetos/bot-vagas.png",
+    name: "bot-vagas",
+    desc: {
+      pt: "Ferramenta que encontra vagas de estágio, filtra por perfil, adapta o currículo e preenche formulários de candidatura. Busca em Greenhouse, Lever e na busca pública da Gupy, filtra por palavras-chave e gera o currículo em PDF de 1 página a partir de um único perfil, com um verificador de fatos que rejeita habilidade, empresa ou data que não esteja nele. O copiloto abre a vaga num navegador visível, preenche o que reconhece e destaca o resto, mas nunca clica, nunca marca consentimento e nunca envia: quem confere e envia é sempre uma pessoa. Decidi por isso depois de descartar a candidatura 100% automática, porque um envio errado não tem volta. Painel local com botão PARAR, rodada diária por timer do systemd, aviso no celular, dados pessoais fora do git e 280 testes automatizados com CI.",
+      en: "Tool that finds internship openings, filters them by profile, tailors the résumé and fills in application forms. It searches Greenhouse, Lever and Gupy's public search, filters by keywords and generates a 1-page PDF résumé from a single profile, with a fact checker that rejects any skill, company or date not in it. The copilot opens the job in a visible browser, fills in what it recognizes and highlights the rest, but never clicks, never ticks consent boxes and never submits: a person always reviews and sends. I chose that after dropping fully automatic applications, because a wrong submission can't be undone. Local dashboard with a STOP button, daily systemd timer, phone alerts, personal data kept out of git, and 280 automated tests with CI.",
+    },
+    stack: ["Python", "Playwright", "FastAPI", "SQLite", "Pydantic", "systemd", "Claude API", "pytest"],
+    tags: ["ai"],
+    repo: "https://github.com/Thiago-Mateus0/bot-vagas",
+    ai: {
+      name: "Avaliador",
+      desc: {
+        pt: "Nota de 0 a 10 de cada vaga em relação ao perfil, dada pelo Claude Haiku. A chamada paga só roda com a flag --real, um contador de gasto aplica o teto mensal, e o currículo adaptado passa por um verificador de fatos: o que não está no perfil não entra. Dados pessoais não são enviados ao modelo nem aos logs.",
+        en: "A 0 to 10 score for each job against the profile, given by Claude Haiku. The paid call only runs with the --real flag, a spend counter enforces a monthly cap, and the tailored résumé goes through a fact checker: anything not in the profile is dropped. Personal data is never sent to the model or to the logs.",
+      },
+      stack: ["Claude API", "verificador de fatos", "teto de gasto"],
+    },
+  },
+  {
     slug: "arkhe-finance",
+    featured: true,
     image: "/projetos/arkhe-finance.png",
     name: "Arkhé Finance",
     desc: {
@@ -64,9 +89,12 @@ export const projects: Project[] = [
     },
     stack: ["Python", "FastAPI", "SQLite", "React", "TypeScript", "Tailwind", "pytest"],
     tags: ["web"],
+    repo: "https://github.com/Thiago-Mateus0/Arkhe-finance",
   },
   {
     slug: "extrator-enem",
+    image: "/projetos/extrator-enem.png",
+    repo: "https://github.com/Thiago-Mateus0/extrator-enem",
     name: "Extrator ENEM",
     desc: {
       pt: "Lê a prova e o gabarito oficiais do ENEM em PDF e entrega cada questão em JSON: enunciado, alternativas, figuras, tabelas, fórmulas e a resposta certa. Foi feito para a plataforma de estudos que desenvolvo com um sócio. O que o programa não tem certeza de ter lido direito vira alerta para conferência, em vez de passar batido. A leitura é geométrica, sem IA e sem rede, e roda dentro de um sandbox (bubblewrap ou Docker) que recusa executar se o isolamento falhar. Extraiu as 90 questões do 2º dia de 2024 e de 2025, com testes e CI.",
@@ -85,6 +113,7 @@ export const projects: Project[] = [
     },
     stack: ["Python", "JSON"],
     tags: ["web"],
+    repo: "https://github.com/Thiago-Mateus0/Study-Track",
   },
 ];
 
