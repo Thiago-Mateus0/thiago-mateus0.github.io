@@ -12,8 +12,8 @@ export const profile = {
     en: "Full-stack developer",
   } as L,
   bio: {
-    pt: "Construo aplicações web de ponta a ponta e estou me aprofundando em IA, aprendizado de máquina e dados.",
-    en: "I build web applications end to end and I'm going deeper into AI, machine learning and data.",
+    pt: "Construo aplicações web de ponta a ponta e estou me aprofundando em back-end, banco de dados e IA aplicada.",
+    en: "I build web applications end to end and I'm going deeper into back-end, databases and applied AI.",
   } as L,
 };
 
@@ -112,14 +112,14 @@ export const projects: Project[] = [
       en: "Python CLI to track studying. Each session records the topic and time, and the program shows the total studied and tracks a daily goal. Data is stored in JSON. It was my first project on GitHub.",
     },
     stack: ["Python", "JSON"],
-    tags: ["web"],
+    tags: [],
     repo: "https://github.com/Thiago-Mateus0/Study-Track",
   },
 ];
 
 export const focus: L = {
-  pt: "Foco atual: IA, ML e engenharia de IA",
-  en: "Current focus: AI, ML and AI engineering",
+  pt: "Foco atual: back-end, banco de dados e IA aplicada",
+  en: "Current focus: back-end, databases and applied AI",
 };
 
 export type TimelineItem = {
