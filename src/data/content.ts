@@ -47,6 +47,7 @@ export const projects: Project[] = [
     },
     stack: ["React", "Vite", "TypeScript", "Node.js", "PostgreSQL", "PL/pgSQL", "Claude API"],
     tags: ["web", "ai"],
+    demo: "https://github.com/Thiago-Mateus0/lifetrailer-studio/blob/main/docs/video/demo-lifetrailer.mp4",
     repo: "https://github.com/Thiago-Mateus0/lifetrailer-studio",
     ai: {
       name: "Merida",
