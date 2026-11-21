@@ -6,7 +6,7 @@ export const profile = {
   github: "https://github.com/Thiago-Mateus0",
   linkedin: "https://www.linkedin.com/in/thiago-mateus-91180a3a8",
   // preencha para exibir o botão de e-mail no contato
-  email: "" as string,
+  email: "thiago.mateustech@gmail.com",
   role: {
     pt: "Desenvolvedor full-stack",
     en: "Full-stack developer",
