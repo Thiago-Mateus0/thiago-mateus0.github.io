@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import T from "../components/T.astro";
 import Terminal from "../components/Terminal.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { ArrowRight, ArrowUpRight, ChevronDown, Download } from "@lucide/astro";
+import { ArrowRight, ArrowUpRight, ChevronDown, Download, Mail } from "@lucide/astro";
 import { profile, projects, focus, timeline, learning } from "../data/content";
 
 const featured = projects.filter((p) => p.featured);
@@ -14,8 +14,8 @@ const last = rest.join(" ");
 
 // seções = unidades do rack (mesma ordem)
 const sections = [
-  { id: "inicio", u: "AL1", name: "farol.sh", pt: "Início", en: "Home" },
-  { id: "projetos", u: "AL2", name: "obras/", pt: "Projetos", en: "Projects" },
+  { id: "inicio", u: "AL1", name: "inicio.sh", pt: "Início", en: "Home" },
+  { id: "projetos", u: "AL2", name: "projetos/", pt: "Projetos", en: "Projects" },
   { id: "sobre", u: "AL3", name: "eu.md", pt: "Sobre", en: "About" },
   { id: "terminal", u: "AL4", name: "ssh visitante@", pt: "Terminal", en: "Terminal" },
   { id: "contato", u: "AL5", name: "sinal --aberto", pt: "Contato", en: "Contact" },
@@ -31,8 +31,8 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
   <header class="hdr">
     <div class="hdr-in">
       <a class="logo" href="#inicio" aria-label="Thiago Mateus">
-        <span class="logo-mark" aria-hidden="true">TM</span>
-        thiago<span class="g">/</span>mcz
+        <img class="logo-mark" src="/avatar.jpg" alt="" width="28" height="28" />
+        thiago<span class="g">/</span>dev
       </a>
       <nav class="nav" aria-label="Principal">
         {sections.slice(1).map((s, i) => (
@@ -53,7 +53,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <div class="floor" aria-hidden="true"></div>
       <div class="glow" aria-hidden="true"></div>
       <div class="hud" aria-hidden="true">
-        <span>rack <b>mcz-01</b></span>
+        <span>rack <b>dev-01</b></span>
         <span>{profile.location}</span>
         <span>UTC−3 · <b id="clock">--:--</b></span>
       </div>
@@ -66,7 +66,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             <div class="face f-right"></div>
             <div class="face f-top"></div>
             <div class="post l"></div><div class="post r"></div>
-            <div class="cap t">MCZ-01</div><div class="cap b">THIAGO MATEUS</div>
+            <div class="cap t">DEV-01</div><div class="cap b">THIAGO MATEUS</div>
 
             <div id="units">
               {sections.map((s, i) => (
@@ -100,7 +100,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             </div>
 
             <div class="door" id="door" aria-hidden="true">
-              <div class="door-lcd"><i></i>MCZ-01 · NO AR</div>
+              <div class="door-lcd"><i></i>DEV-01 · NO AR</div>
               <div class="door-handle"></div>
               <div class="door-hint">▼ scroll</div>
             </div>
@@ -116,9 +116,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U01 -->
       <section class="hero" id="inicio">
         <div class="boot" aria-hidden="true">
-          <span style="animation-delay:0.1s">&gt; acendendo o farol ........ <b>ok</b></span>
-          <span style="animation-delay:0.6s">&gt; montando /obras ........ <b>ok</b></span>
-          <span style="animation-delay:1.1s">&gt; maré: <b>alta</b> · {profile.location}</span>
+          <span style="animation-delay:0.1s">&gt; iniciando o servidor ........  <b>ok</b></span>
+          <span style="animation-delay:0.6s">&gt; montando /projetos ........ <b>ok</b></span>
+          <span style="animation-delay:1.1s">&gt; status: <b>online</b> · {profile.location}</span>
         </div>
 
         <h1 class="name" aria-label={profile.name}>
@@ -143,7 +143,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
             </div>
             <figcaption class="mono">
               <span><b>TM-001</b> · <T t={{ pt: "OPERADOR", en: "OPERATOR" }} /></span>
-              <span><i class="live"></i> MCZ · <b id="clock2">--:--</b></span>
+              <span><i class="live"></i> BRT · <b id="clock2">--:--</b></span>
             </figcaption>
           </figure>
         </div>
@@ -165,9 +165,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U02 projetos -->
       <section class="sec" id="projetos">
         <div class="blade hot">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL2 · OBRAS/</span><span class="st">● {projects.length} <T t={{ pt: "PROJETOS", en: "PROJECTS" }} /></span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL2 · PROJETOS/</span><span class="st">● {projects.length} <T t={{ pt: "PROJETOS", en: "PROJECTS" }} /></span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "O que já botei no ar", en: "What I've shipped" }} /></h2>
+            <h2 class="h2"><T t={{ pt: "O que eu construí", en: "What I've built" }} /></h2>
             <div class="filters">
               <button data-filter="all" data-active class="chip"><T t={{ pt: "todos", en: "all" }} /></button>
               <button data-filter="web" class="chip">web</button>
@@ -188,7 +188,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
         <div class="blade">
           <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL3 · EU.MD</span><span class="st">● HEAD</span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "Do banco de dados ao botão.", en: "From database to button." }} /> <em><T t={{ pt: "Agora com IA no meio.", en: "Now with AI in the loop." }} /></em></h2>
+            <h2 class="h2"><T t={{ pt: "Banco, API e tela.", en: "Database, API and UI." }} /> <em><T t={{ pt: "IA só onde ajuda.", en: "AI only where it helps." }} /></em></h2>
             <p class="p"><T t={profile.bio} /></p>
 
             <div class="stats">
@@ -234,7 +234,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
       <!-- U04 terminal -->
       <section class="sec" id="terminal">
         <div class="blade">
-          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL4 · SSH VISITANTE@MCZ</span><span class="st">● <T t={{ pt: "INTERATIVO", en: "INTERACTIVE" }} /></span></div>
+          <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL4 · SSH VISITANTE@DEV</span><span class="st">● <T t={{ pt: "INTERATIVO", en: "INTERACTIVE" }} /></span></div>
           <div class="bb">
             <h2 class="h2"><T t={{ pt: "Manda um comando.", en: "Send a command." }} /></h2>
             <Terminal />
@@ -247,8 +247,8 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
         <div class="blade hot">
           <div class="bh"><span><span class="leds"><i></i><i></i><i></i></span>AL5 · SINAL --ABERTO</span><span class="st">● <T t={{ pt: "NO AR", en: "ON AIR" }} /></span></div>
           <div class="bb">
-            <h2 class="h2"><T t={{ pt: "Bora trocar uma ideia?", en: "Shall we talk shop?" }} /></h2>
-            <p class="p"><T t={{ pt: "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre IA e desenvolvimento web? Manda o sinal que eu respondo.", en: "Got a role, a project, or just want to chat about AI and web development? Send a signal and I'll answer." }} /></p>
+            <h2 class="h2"><T t={{ pt: "Quer ver o código?", en: "Want to see the code?" }} /></h2>
+            <p class="p"><T t={{ pt: "Estou buscando estágio em desenvolvimento. Se tem uma vaga, ou quer que eu explique como algum projeto funciona por dentro, manda mensagem.", en: "I'm looking for a development internship. If you have an opening, or want me to walk you through how any of these projects works inside, send a message." }} /></p>
             <figure class="sig" id="sig">
               <svg viewBox="131 133 1280 581" role="img" aria-label={`Assinatura de ${profile.name}`}>
                 <defs>
@@ -265,7 +265,12 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
               </svg>
             </figure>
             {profile.email && (
-              <div class="mail"><span>$</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+              <div class="mailcta">
+                <a class="btn" href={`mailto:${profile.email}?subject=${encodeURIComponent("Contato pelo portfólio")}`}>
+                  <Mail size={18} aria-hidden="true" /> <T t={{ pt: "ENVIAR UM E-MAIL", en: "SEND ME AN EMAIL" }} />
+                </a>
+                <a class="mailaddr" href={`mailto:${profile.email}`}>{profile.email}</a>
+              </div>
             )}
             <div class="social">
               <a class="ghost big" href={profile.linkedin} target="_blank" rel="noopener">linkedin <ArrowUpRight size={16} aria-hidden="true" /></a>
@@ -285,7 +290,7 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
         </div>
         <footer class="foot">
           <span>© 2026 {profile.name}</span>
-          <span>rack mcz-01 · al5 · feito em Maceió</span>
+          <span>rack dev-01 · al5</span>
         </footer>
       </section>
     </main>
@@ -395,9 +400,9 @@ const dm = (seed: number) => Array.from({ length: 21 }, (_, i) => ((i * 7 + seed
     if (calm) sig.classList.add("in");
     else new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { sig.classList.add("in"); o.disconnect(); } }), { threshold: 0.6 }).observe(sig);
 
-    // relógio de Maceió
+    // relógio (horário de Brasília)
     const clock = document.getElementById("clock"), clock2 = document.getElementById("clock2");
-    const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Maceio" });
+    const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
     const tick = () => (clock.textContent = clock2.textContent = fmt.format(new Date()));
     tick();
     setInterval(tick, 15000);

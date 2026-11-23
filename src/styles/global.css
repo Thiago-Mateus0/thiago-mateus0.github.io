@@ -64,7 +64,7 @@ kbd { font-family: var(--mono); font-size: 0.7em; border: 1px solid var(--line-2
 }
 .hdr-in { padding: 12px clamp(16px, 2.4vw, 32px); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .logo { display: flex; align-items: center; gap: 10px; font: 15px var(--px); }
-.logo-mark { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--g2); background: rgb(91 140 255 / 0.1); color: var(--g); font: 700 12px var(--px); letter-spacing: 0; }
+.logo-mark { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--g2); object-fit: cover; }
 .nav { display: none; gap: 6px; font: 12px var(--px); }
 .nav a { display: flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px; border-radius: 8px; color: var(--f2); transition: color 0.15s, background 0.15s; }
 .nav a b { font-weight: 400; color: var(--g); }
@@ -285,6 +285,8 @@ button.chip:hover { border-color: var(--g2); color: var(--g); }
 
 /* ---------- contato ---------- */
 .mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 10px 10px 18px; border: 1px solid var(--line-2); border-radius: 14px; background: var(--bg); }
+.mailcta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.mailaddr { font: 15px var(--mono); overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 4px; }
 .mail > span { font-family: var(--mono); color: var(--g); }
 .mail a { flex: 1 1 220px; font: 16px var(--mono); overflow-wrap: anywhere; }
 .social { display: flex; flex-wrap: wrap; gap: 10px; }

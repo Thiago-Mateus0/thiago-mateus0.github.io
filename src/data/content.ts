@@ -2,7 +2,7 @@ export type L = { pt: string; en: string };
 
 export const profile = {
   name: "Thiago Mateus",
-  location: "Maceió - AL",
+  location: "Brasil",
   github: "https://github.com/Thiago-Mateus0",
   linkedin: "https://www.linkedin.com/in/thiago-mateus-tech",
   // preencha para exibir o botão de e-mail no contato
@@ -12,8 +12,8 @@ export const profile = {
     en: "Full-stack developer",
   } as L,
   bio: {
-    pt: "Construo aplicações web de ponta a ponta e estou me aprofundando em back-end, banco de dados e IA aplicada.",
-    en: "I build web applications end to end and I'm going deeper into back-end, databases and applied AI.",
+    pt: "Estudante de Ciência da Computação. Desenvolvo o sistema de gestão que um estúdio fotográfico usa no dia a dia e ferramentas em Python em que a IA sugere e uma pessoa confirma.",
+    en: "Computer Science student. I build the management system a photo studio uses day to day, and Python tools where the AI suggests and a person confirms.",
   } as L,
 };
 
@@ -42,8 +42,8 @@ export const projects: Project[] = [
     image: "/projetos/lifetrailer.png",
     name: "LifeTrailer",
     desc: {
-      pt: "Sistema de gestão em modo quiosque (tablet) para um estúdio fotográfico de Maceió, em uso real. Substitui quadros e comandas de papel com 8 módulos: Comanda, Checklist, Estoque, Escala, Horas extras, Avisos, Achados e Treinamento. Integra com o Altegio por webhook, com log de auditoria append-only garantido no banco e autenticação por PIN por aparelho.",
-      en: "Kiosk-mode (tablet) management system for a photo studio in Maceió, in real use. Replaces paper boards and tabs with 8 modules: Orders, Checklist, Inventory, Schedule, Overtime, Notices, Lost & Found and Training. Integrates with Altegio via webhook, with an append-only audit log enforced at the database level and per-device PIN authentication.",
+      pt: "Sistema de gestão em modo quiosque (tablet) para um estúdio fotográfico, em uso diário na operação. Substitui quadros e comandas de papel com 8 módulos: Comanda, Checklist, Estoque, Escala, Horas extras, Avisos, Achados e Treinamento. Integra com o Altegio por webhook, com log de auditoria append-only garantido no banco e autenticação por PIN por aparelho.",
+      en: "Kiosk-mode (tablet) management system for a photo studio, in daily use on the floor. Replaces paper boards and tabs with 8 modules: Orders, Checklist, Inventory, Schedule, Overtime, Notices, Lost & Found and Training. Integrates with Altegio via webhook, with an append-only audit log enforced at the database level and per-device PIN authentication.",
     },
     stack: ["React", "Vite", "TypeScript", "Node.js", "PostgreSQL", "PL/pgSQL", "Claude API"],
     tags: ["web", "ai"],
